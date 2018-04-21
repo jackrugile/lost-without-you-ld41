@@ -6,6 +6,11 @@ class BaseLevel {
     this.env = env;
     this.game = game;
     this.name = name;
+    this.observe();
+  }
+
+  observe() {
+    this.env.eventful.on('game-animate', (e) => this.update(e));
   }
 
   build() {
@@ -33,11 +38,12 @@ class BaseLevel {
   createGround() {
     let geometry = new THREE.PlaneBufferGeometry(this.mazeRows, this.mazeCols);
     geometry.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-    let material = new THREE.MeshBasicMaterial({
-      color: 0x333333,
-      side: THREE.DoubleSide
+    let material = new THREE.MeshPhongMaterial({
+      color: 0x666666
     });
     let mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = false;
+    mesh.receiveShadow = true;
     mesh.position.set(0, 0, 0);
     this.game.world.scene.add(mesh);
   }
@@ -52,14 +58,21 @@ class BaseLevel {
           let x = j - this.mazeCols / 2;
           let z = i - this.mazeRows / 2;
           let geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-          let material = new THREE.MeshNormalMaterial();
+          let material = new THREE.MeshPhongMaterial({
+            color: 0x666666
+          });
           let mesh = new THREE.Mesh(geometry, material);
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
           mesh.position.set(x + 0.5, 0.5, z + 0.5);
           this.walls.push(mesh);
           this.game.world.scene.add(mesh);
         }
       });
     });
+  }
+
+  update() {
   }
 
 }

@@ -31,17 +31,16 @@ class World {
 
   setupRenderer() {
     this.renderer = new THREE.WebGLRenderer({
-      antialias: true
+      antialias: true,
+      precision: 'highp'
     });
-    // if(this.shadows_enabled) {
-    //   this.renderer.shadowMap.enabled = true;
-    //   this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    // }
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.game.dom.container.appendChild(this.renderer.domElement);
   }
 
   setupCameras() {
-    this.fov = 75;
+    this.fov = 50;
     this.camera = new THREE.PerspectiveCamera(this.fov, 0, 0.1, 1000);
     this.camera.position.set(-5, 2.5, 5);
 
@@ -52,10 +51,10 @@ class World {
   }
 
   setupGrid() {
-    this.gridHelper = new THREE.GridHelper(100, 100, 0xffffff, 0x666666);
-    this.gridHelper.material.transparent = true;
-    this.gridHelper.material.opacity = 0.3;
-    this.scene.add(this.gridHelper);
+    // this.gridHelper = new THREE.GridHelper(100, 100, 0xffffff, 0x666666);
+    // this.gridHelper.material.transparent = true;
+    // this.gridHelper.material.opacity = 0.2;
+    // this.scene.add(this.gridHelper);
   }
 
   update() {

@@ -1,6 +1,7 @@
 const env = require('./env.js');
-const World = require('./core/world');
 const StateManager = require('./state/manager');
+const Time = require('./core/time');
+const World = require('./core/world');
 
 require('howler');
 
@@ -16,6 +17,7 @@ class Game {
     this.resolution = {};
 
     this.setupDOM();
+    this.setupTime();
     this.setupWorld();
     this.setupStates();
     this.setupInputs();
@@ -28,6 +30,10 @@ class Game {
   setupDOM() {
     this.dom = {};
     this.dom.container = document.querySelector('.container');
+  }
+
+  setupTime() {
+    this.time = new Time();
   }
 
   setupWorld() {
@@ -67,6 +73,7 @@ class Game {
   onResize() {
     let ratioWin = window.innerWidth / window.innerHeight;
     let ratioGame = 16 / 9;
+
 
     if(ratioWin > ratioGame) {
       this.resolution.x = window.innerHeight * ratioGame;

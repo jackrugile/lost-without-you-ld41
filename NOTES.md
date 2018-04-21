@@ -53,7 +53,7 @@
 - light unite
 - light and unite
 
-#GENRE
+# GENRE
 
 - solo-coop-turn-based action-puzzle
 
@@ -70,3 +70,6 @@ var maze = '
 0 0 0 4 1 0
 1 1 1 0 1 0
 ';
+
+# NICE TO HAVES
+- catch a high energy firefly orb to create a permanent light source
