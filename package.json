@@ -1,0 +1,60 @@
+{
+  "name": "starter-ld41",
+  "author": "Jack Rugile <jack@jackrugile.com> (https://jackrugile.com)",
+  "version": "0.0.1",
+  "description": "Ludum Dare 41 Starter",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jackrugile/starter-ld41.git"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "lodash"
+    ]
+  },
+  "dependencies": {
+    "fast-simplex-noise": "^3.2.0",
+    "howler": "^2.0.9",
+    "lodash": "^4.17.4",
+    "three": "^0.92.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.125.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "7.1.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-env": "^1.6.0",
+    "browser-sync": "^2.18.13",
+    "browser-sync-reuse-tab": "^1.0.0",
+    "del": "^3.0.0",
+    "eslint": "^4.7.2",
+    "eslint-loader": "^1.9.0",
+    "glob": "^7.1.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-cli": "^1.4.0",
+    "gulp-hub": "github:frankwallis/gulp-hub#registry-init",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-load-tasks": "^0.8.4",
+    "gulp-mustache": "^3.0.0",
+    "gulp-notify": "^3.0.0",
+    "gulp-rev": "^8.0.0",
+    "gulp-rev-replace": "^0.4.3",
+    "gulp-sass": "^3.1.0",
+    "gulp-sass-lint": "^1.3.3",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-util": "^3.0.8",
+    "modernizr-webpack-plugin": "^1.0.6",
+    "mustache-loader": "^1.2.0",
+    "webpack": "^3.6.0",
+    "webpack-glsl-loader": "^1.0.1",
+    "webpack-stream": "^4.0.0"
+  }
+}

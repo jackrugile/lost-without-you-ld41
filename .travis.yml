@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+
+before_install:
+  - npm install -g gulp-cli
+
+script:
+  - gulp dist
+  - gulp dist -e production
