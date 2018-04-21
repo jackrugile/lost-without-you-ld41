@@ -9,10 +9,6 @@ class World {
 
     this.game = init.game;
 
-    this.build();
-  }
-
-  build() {
     this.observe();
     this.setupScene();
     this.setupLights();
@@ -36,7 +32,6 @@ class World {
   setupRenderer() {
     this.renderer = new THREE.WebGLRenderer({
       antialias: true
-      //alpha: true
     });
     // if(this.shadows_enabled) {
     //   this.renderer.shadowMap.enabled = true;
@@ -46,12 +41,9 @@ class World {
   }
 
   setupCameras() {
-    this.fov = 60;
-    this.camera = new THREE.PerspectiveCamera(this.fov, 0, 1, 1000);
-    this.camera.position.set(-10, 5, 0);
-    // this.camera_position_vec = new THREE.Vector3();
-    // this.camera_target_vec = new THREE.Vector3();
-    // this.camera_look_at_vec = new THREE.Vector3();
+    this.fov = 75;
+    this.camera = new THREE.PerspectiveCamera(this.fov, 0, 0.1, 1000);
+    this.camera.position.set(-5, 2.5, 5);
 
     this.orbit = new THREE.OrbitControls(this.camera, this.game.dom.container);
     this.orbit.enableDamping = true;
@@ -60,8 +52,9 @@ class World {
   }
 
   setupGrid() {
-    this.gridHelper = new THREE.GridHelper(100, 20, 0xffffff, 0x666666);
+    this.gridHelper = new THREE.GridHelper(100, 100, 0xffffff, 0x666666);
     this.gridHelper.material.transparent = true;
+    this.gridHelper.material.opacity = 0.3;
     this.scene.add(this.gridHelper);
   }
 

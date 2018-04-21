@@ -1,7 +1,8 @@
 const env = require('./env.js');
 const World = require('./core/world');
+const StateManager = require('./state/manager');
 
-//require("howler");
+require('howler');
 
 class Game {
 
@@ -15,18 +16,13 @@ class Game {
     this.resolution = {};
 
     this.setupDOM();
-    this.setupInputs();
     this.setupWorld();
+    this.setupStates();
+    this.setupInputs();
     this.setupSounds();
     this.onResize();
     this.start();
     this.observe();
-  }
-
-  log(...args) {
-    if(window.env === 'development') {
-      console.log(...args);
-    }
   }
 
   setupDOM() {
@@ -34,11 +30,16 @@ class Game {
     this.dom.container = document.querySelector('.container');
   }
 
-  setupInputs() {
-  }
-
   setupWorld() {
     this.world = new World({ game: this });
+  }
+
+  setupStates() {
+    this.stateManager = new StateManager(this);
+    this.stateManager.set('play');
+  }
+
+  setupInputs() {
   }
 
   setupSounds() {
@@ -55,18 +56,6 @@ class Game {
       }
       sound.play();
     }
-  }
-
-  setState(state) {
-    if(this.state_current) {
-      this.states[this.state_current].deactivate();
-      this.env.eventful.trigger(`${this.state_current}-state-deactivate`);
-      this.log(`${this.state_current} state deactivated`);
-    }
-    this.state_current = state;
-    this.states[this.state_current].activate();
-    this.env.eventful.trigger(`${this.state_current}-state-activate`);
-    this.log(`${this.state_current} state activated`);
   }
 
   observe() {
