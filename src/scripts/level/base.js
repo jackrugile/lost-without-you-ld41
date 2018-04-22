@@ -101,9 +101,14 @@ class BaseLevel {
         let off = (i % 6 === 0) ? 1 : 0;
         if(item === 0 && (i % 3) === 0 && ((j + off) % 3) === 0) {
           let x = j - this.mazeCols / 2 + 0.5;
-          let y = 0.5;
+          let y = 0.29;
           let z = i - this.mazeRows / 2 + 0.5;
+          //if(Math.random() < 0.5) {
           this.game.fireflies.push(new Firefly(this.game, new THREE.Vector3(x, y, z)));
+          // } else {
+          //   this.game.fireflies.push(new Firefly(this.game, new THREE.Vector3(x, y, z)));
+          //   this.game.fireflies.push(new Firefly(this.game, new THREE.Vector3(x, y, z)));
+          // }
         }
       });
     });

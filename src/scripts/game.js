@@ -112,7 +112,12 @@ class Game {
   }
 
   setupSounds() {
-    this.sounds = {};
+    this.sounds = {
+      fireflyCollect: new Howl({
+        src: ['/sounds/firefly-collect-1.wav'],
+        volume: 1
+      })
+    };
   }
 
   playSound(sound, config = null) {

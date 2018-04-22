@@ -175,22 +175,45 @@ class Hero {
     }
   }
 
+  collideFireflies() {
+    let fireflies = this.game.fireflies;
+    let i = fireflies.length;
+    while(i--) {
+      let firefly = fireflies[i];
+      if(this.mesh.bbox.intersectsBox(firefly.mesh.bbox)) {
+        firefly.destroy();
+        fireflies.splice(i, 1);
+        this.collectFirefly();
+      }
+    }
+  }
+
+  collectFirefly() {
+    this.life += 0.5;
+    this.life = this.calc.clamp(this.life, 0, 1);
+    //this.game.sounds.fireflyCollect.rate(this.calc.rand(0.25, 0.6));
+    this.game.sounds.fireflyCollect.play();
+  }
+
   updateLightLife() {
-  //   if(this.life > 0) {
-  //     this.life -= this.decay;
-  //     this.light1.distance = 2 + this.lightDistanceBase * this.life;
-  //     this.light2.distance = 2 + this.lightDistanceBase * this.life;
-  //   } else {
-  //     console.log('ya died!');
-  //     this.light1.distance = 2;
-  //     this.light2.distance = 2;
-  //   }
+    // if(this.isActive) {
+    //   if(this.life > 0) {
+    //     this.life -= this.decay;
+    //     this.light1.distance = 2 + this.lightDistanceBase * this.life;
+    //     this.light2.distance = 2 + this.lightDistanceBase * this.life;
+    //   } else {
+    //     console.log('ya died!');
+    //     this.light1.distance = 2;
+    //     this.light2.distance = 2;
+    //   }
+    // }
   }
 
   update() {
     this.move();
     this.updateLights();
     this.collideHeros();
+    this.collideFireflies();
     this.updateLightLife();
   }
 

@@ -1,10 +1,11 @@
 # TASKS
-  - firefly collisions
 - UI for overall time, time left in turn, life left
 - menu/level select
+- level complete
+- level failed
 - sound
 - music
-- loader
+- asset loader
 - juice
   - particle systems
   - camera shake
@@ -18,6 +19,17 @@
 - don't create multiple geometries or materials if I don't have to
 - torches
   - touch collisions
+
+# SOUNDS
+
+- firefly buzz loop
+- firefly collect
+- unite with friend
+- drag loop
+- wall hit
+- low life warning ping
+- death
+- music loop
 
 # NAMES
 

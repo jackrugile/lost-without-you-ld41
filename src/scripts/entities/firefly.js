@@ -19,6 +19,8 @@ class Firefly {
     this.range = 0.4;
     this.angle = this.calc.rand(Math.PI * 2);
 
+    this.dead = false;
+
     this.observe();
     this.setupMesh();
     this.setupGlow();
@@ -32,9 +34,7 @@ class Firefly {
   setupMesh() {
     this.mesh = new THREE.Mesh(this.game.fireflyGeometry, this.game.fireflyMaterial);
     this.mesh.position.copy(this.origin);
-    //this.mesh.castShadow = true;
-    //this.mesh.receiveShadow = true;
-    //this.mesh.bbox = new THREE.Box3();
+    this.mesh.bbox = new THREE.Box3();
     this.game.world.scene.add(this.mesh);
   }
 
@@ -75,6 +75,7 @@ class Firefly {
       this.mesh.position.z = this.origin.z - this.range;
       this.angle += Math.PI / 2;
     }
+    this.mesh.bbox.setFromObject(this.mesh);
   }
 
   pulse() {
@@ -86,14 +87,16 @@ class Firefly {
   }
 
   destroy() {
-    this.game.world.scene.add(this.mesh);
-    this.mesh.dispose();
+    this.dead = true;
+    this.game.world.scene.remove(this.mesh);
     this.mesh = null;
   }
 
   update() {
-    this.move();
-    this.pulse();
+    if(!this.dead) {
+      this.move();
+      this.pulse();
+    }
   }
 
 }
