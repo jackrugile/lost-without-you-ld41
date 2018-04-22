@@ -18,10 +18,28 @@ class PlayState extends BaseState {
 
     this.game.heroA.setActive(true);
     this.game.activeHero = this.game.heroA;
+
+    // set level title
+    let levelNames = [
+      'alpha',
+      'beta',
+      'gamma',
+      'delta'
+    ];
+    this.dom.levelTitle.textContent = `Level ${(levelNames.indexOf(this.game.currentLevel) + 1)}`;
   }
 
   setupDOM() {
     super.setupDOM();
+
+    this.dom.levelTitle = document.querySelector('.state-play-level-title');
+    this.dom.levelTime = document.querySelector('.state-play-level-time');
+    this.dom.heroAWrap = document.querySelector('.state-play-state-play-hero-a-wrap');
+    this.dom.heroBWrap = document.querySelector('.state-play-state-play-hero-b-wrap');
+    this.dom.heroAMeterLightBar = document.querySelector('.state-play-hero-a-meter-light-bar');
+    this.dom.heroBMeterLightBar = document.querySelector('.state-play-hero-b-meter-light-bar');
+    this.dom.heroAMeterTimeBar = document.querySelector('.state-play-hero-a-meter-time-bar');
+    this.dom.heroBMeterTimeBar = document.querySelector('.state-play-hero-b-meter-time-bar');
   }
 
   switchHero() {

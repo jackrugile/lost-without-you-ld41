@@ -19,8 +19,10 @@
   - explode in to sky as maze drifts away
   - make maze explode
   - use characters as the os in the logo
-- “Why do we keep getting lost”
+- "Why do we keep getting lost"
 - Lvl 4, both start in center of level
+- icons
+- flash or puff when collecting firefly
 
 # GENERAL
 

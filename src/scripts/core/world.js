@@ -36,6 +36,7 @@ class World {
 
   setupScene() {
     this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color('hsl(0, 0%, 3%)');
   }
 
   setupLights() {

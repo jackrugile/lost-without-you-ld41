@@ -1,3 +1,7 @@
+//-------------------------------------------------
+// GENERAL
+//-------------------------------------------------
+
 html,
 body
   height: 100%
@@ -5,7 +9,21 @@ body
 
 body
   background: #000
+  color: #fff
   font-family: 'Dosis', sans-serif
+
+//-------------------------------------------------
+// TYPOGRAPHY
+//-------------------------------------------------
+
+h2
+  font-size: 128px
+  font-weight: 500
+  text-align: center
+
+//-------------------------------------------------
+// WRAPPERS
+//-------------------------------------------------
 
 .container
   bottom: 0
@@ -44,6 +62,10 @@ body
   &.state-active
     display: flex
 
+//-------------------------------------------------
+// STATE MENU
+//-------------------------------------------------
+
 .state-menu
   background: radial-gradient(#181818, #000)
 
@@ -54,13 +76,13 @@ body
   margin-bottom: 40px
   text-align: center
   *:nth-child(1)
-    color: hsl(130, 90%, 60%)
+    color: hsl($hero-a-hue, $hero-sat, $hero-lit)
     font-weight: 400
   *:nth-child(2)
     font-weight: 200
     position: relative
   *:nth-child(3)
-    color: hsl(210, 90%, 60%)
+    color: hsl($hero-b-hue, $hero-sat, $hero-lit)
     font-weight: 400
 
 .state-menu-subtitle
@@ -108,20 +130,137 @@ body
     box-shadow: 0 0 0 8px hsla(0, 0%, 100%, 0.1)
     transform: scale(1.1)
 
+//-------------------------------------------------
+// STATE INSTRUCTIONS
+//-------------------------------------------------
+
 .state-instructions
   background: hsla(60, 100%, 50%, 0.2)
 
+//-------------------------------------------------
+// STATE PLAY
+//-------------------------------------------------
+
 .state-play
   //background: hsla(120, 100%, 50%, 0.2)
+  font-size: 40px
+
+.state-play-level-wrap
+  position: absolute
+  right: 60px
+  text-align: right
+  top: 60px
+
+.state-play-level-title
+  font-weight: 600
+  margin-bottom: 10px
+
+.state-play-level-time
+  font-size: 30px
+  font-weight: 400
+  span
+    display: inline-block
+    margin: 0 3px
+    position: relative
+    top: -0.14em
+
+.state-play-hero-wrap
+  align-items: center
+  display: flex
+  font-size: 35px
+  left: 60px
+  line-height: 1
+  position: absolute
+  text-align: right
+  &.state-play-hero-a-wrap
+    top: 60px
+  &.state-play-hero-b-wrap
+    bottom: 60px
+
+.state-play-hero-title
+  font-weight: 600
+  position: relative
+  top: -5px
+  &.state-play-hero-a-title
+    color: hsl($hero-a-hue, $hero-sat, $hero-lit)
+  &.state-play-hero-b-title
+    color: hsl($hero-b-hue, $hero-sat, $hero-lit)
+
+.state-play-hero-meters
+  //
+
+.state-play-hero-light
+  align-items: center
+  display: flex
+  margin-bottom: 10px
+
+.state-play-hero-time
+  align-items: center
+  display: flex
+
+.state-play-hero-label
+  font-size: 20px
+  font-weight: 400
+  margin-right: 15px
+  width: 70px
+  &.state-play-hero-a-label
+    //color: hsl($hero-a-hue, $hero-sat, $hero-lit)
+  &.state-play-hero-b-label
+    //color: hsl($hero-b-hue, $hero-sat, $hero-lit)
+
+.state-play-hero-meter-light
+  background: hsla(0, 0%, 100%, 0.1)
+  height: 10px
+  overflow: hidden
+  position: relative
+  top: 3px
+  width: 140px
+  &.state-play-hero-a-meter-light
+    //
+  &.state-play-hero-b-meter-light
+    //
+
+.state-play-hero-meter-light-bar
+  background: #fff
+  height: 100%
+  transform: translate3d(-50%, 0, 0)
+  width: 100%
+  &.state-play-hero-a-meter-light-bar
+    //background: hsl($hero-a-hue, $hero-sat, $hero-lit)
+  &.state-play-hero-b-meter-light-bar
+    //background: hsl($hero-b-hue, $hero-sat, $hero-lit)
+
+.state-play-hero-meter-time
+  background: hsla(0, 0%, 100%, 0.1)
+  height: 10px
+  overflow: hidden
+  position: relative
+  top: 3px
+  width: 140px
+  &.state-play-hero-a-meter-time
+    //
+  &.state-play-hero-b-meter-time
+    //
+
+.state-play-hero-meter-time-bar
+  height: 100%
+  transform: translate3d(-50%, 0, 0)
+  width: 100%
+  &.state-play-hero-a-meter-time-bar
+    background: hsl($hero-a-hue, $hero-sat, $hero-lit)
+  &.state-play-hero-b-meter-time-bar
+    background: hsl($hero-b-hue, $hero-sat, $hero-lit)
+
+//-------------------------------------------------
+// STATE WIN
+//-------------------------------------------------
 
 .state-win
   background: hsla(180, 100%, 50%, 0.2)
 
+//-------------------------------------------------
+// STATE LOSE
+//-------------------------------------------------
+
 .state-lose
   background: hsla(220, 100%, 50%, 0.2)
-
-h2
-  color: #fff
-  font-size: 128px
-  font-weight: 500
-  text-align: center
