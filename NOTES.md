@@ -10,7 +10,17 @@
   - particle systems
   - camera shake
   - light flashes
-  - custom shaders for bloom/noise
+  - custom shaders for bloom/noise/scanline
+  - add mesh line explosion on unite
+
+  Explode in to sky as maze drifts away
+
+  Make maze explode
+
+  Use characters as the os in the logo
+
+  “Why do we keep getting lost”
+
 
 # GENERAL
 

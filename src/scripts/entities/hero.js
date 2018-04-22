@@ -26,6 +26,8 @@ class Hero {
     this.lightPositionCurrent = new THREE.Vector3();
     this.lightPositionTarget = new THREE.Vector3();
     this.lightDistanceBase = 5;
+    this.light1Intensity = 0.75;
+    this.light2Intensity = 0.25;
 
     this.observe();
     this.setupMesh();
@@ -43,8 +45,8 @@ class Hero {
     this.depth = 0.3;
     this.geometry = new THREE.BoxBufferGeometry(this.width, this.height, this.depth);
     this.material = new THREE.MeshPhongMaterial({
-      color: new THREE.Color(`hsl(${this.hue}, 90%, 50%)`),
-      specular: new THREE.Color(`hsl(${this.hue}, 90%, 75%)`),
+      color: new THREE.Color(`hsl(${this.hue}, 80%, 50%)`),
+      specular: new THREE.Color(`hsl(${this.hue}, 80%, 75%)`),
       shininess: 100
     });
     this.mesh = new THREE.Mesh(this.geometry, this.material);
@@ -57,11 +59,11 @@ class Hero {
   }
 
   setupLights() {
-    this.light1 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.75, this.lightDistanceBase, 2);
+    this.light1 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 75%, 50%)`), this.light1Intensity, this.lightDistanceBase, 2);
     this.light1.castShadow = false;
     this.mesh.add(this.light1);
 
-    this.light2 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.25, this.lightDistanceBase, 2);
+    this.light2 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 75%, 50%)`), this.light2Intensity, this.lightDistanceBase, 2);
     this.light2.castShadow = true;
     this.mesh.add(this.light2);
   }
@@ -207,6 +209,10 @@ class Hero {
     //     this.light2.distance = 2;
     //   }
     // }
+
+    let intensity = 0.88 + Math.sin(Date.now() * 0.004) * 0.12;
+    this.light1.intensity = this.light1Intensity * intensity;
+    this.light2.intensity = this.light2Intensity * intensity;
   }
 
   update() {

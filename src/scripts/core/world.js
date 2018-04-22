@@ -1,6 +1,17 @@
 const env = require('../env.js');
 
 require('three/examples/js/controls/OrbitControls.js');
+require('three/examples/js/postprocessing/EffectComposer');
+require('three/examples/js/postprocessing/ShaderPass');
+require('three/examples/js/postprocessing/FilmPass.js');
+require('three/examples/js/postprocessing/RenderPass');
+require('three/examples/js/postprocessing/MaskPass');
+require('three/examples/js/shaders/CopyShader');
+require('three/examples/js/shaders/FilmShader.js');
+require('three/examples/js/shaders/ConvolutionShader');
+require('three/examples/js/shaders/LuminosityHighPassShader');
+require('three/examples/js/shaders/RGBShiftShader');
+require('three/examples/js/postprocessing/UnrealBloomPass');
 
 class World {
 
@@ -14,6 +25,7 @@ class World {
     this.setupLights();
     this.setupRenderer();
     this.setupCameras();
+    this.setupComposer();
     this.setupGrid();
   }
 
@@ -34,6 +46,7 @@ class World {
       antialias: true,
       precision: 'highp'
     });
+    this.renderer.autoClear = false;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.game.dom.container.appendChild(this.renderer.domElement);
@@ -52,6 +65,36 @@ class World {
     this.orbit.enableDamping = true;
     this.orbit.dampingFactor = 0.2;
     this.orbit.enableKeys = false;
+  }
+
+  setupComposer() {
+    this.composer = new THREE.EffectComposer(this.renderer);
+
+    this.renderPass = new THREE.RenderPass(this.scene, this.camera);
+    this.renderPass.renderToScreen = false;
+    //this.renderPass.clear = false;
+    //this.renderPass.clearDepth = true;
+    this.composer.addPass(this.renderPass);
+
+    this.rgbPass = new THREE.ShaderPass(THREE.RGBShiftShader);
+    this.rgbPass.uniforms['amount'].value = 0;
+    this.rgbPass.uniforms['angle'].value = 0;
+    this.rgbPass.renderToScreen = false;
+    this.composer.addPass(this.rgbPass);
+
+    // this.bloomPass = new THREE.UnrealBloomPass(
+    //   new THREE.Vector2(window.innerWidth, window.innerHeight), // resolution
+    //   0.75, // strength
+    //   0.5, // radius
+    //   0.75 //threshold
+    // );
+    // this.bloomPass.renderToScreen = false;
+    // this.composer.addPass(this.bloomPass);
+
+    // noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale
+    this.filmPass = new THREE.FilmPass(0.15, 0.5, 2048, false);
+    this.filmPass.renderToScreen = true;
+    this.composer.addPass(this.filmPass);
   }
 
   setupGrid() {
@@ -76,10 +119,17 @@ class World {
       this.camera.position.copy(this.cameraCurrent);
       this.camera.lookAt(this.cameraLookAtCurrent);
     }
+
+    this.rgbPass.uniforms['amount'].value = 0.0006 + Math.sin(Date.now() * 0.003) * 0.0006;
+    this.rgbPass.uniforms['angle'].value -= 0.05;
+    //this.bloomPass.strength = 0.5 + Math.sin(Date.now() * 0.003) * 0.5;
+    //this.bloomPass.radius = 1 + Math.sin(Date.now() * 0.003) * 1;
+    //this.bloomPass.radius = 0.5 - Math.sin(Date.now() * 0.003) * 0.25;
   }
 
   render() {
-    this.renderer.render(this.scene, this.camera);
+    //this.renderer.render(this.scene, this.camera);
+    this.composer.render(0.00001);
   }
 
   onGameResize(e) {
@@ -88,6 +138,7 @@ class World {
 
     this.renderer.setPixelRatio(e.dpr);
     this.renderer.setSize(e.resolution.x, e.resolution.y);
+    this.composer.setSize(e.resolution.x * e.dpr, e.resolution.y * e.dpr);
   }
 
   onGameAnimate() {
