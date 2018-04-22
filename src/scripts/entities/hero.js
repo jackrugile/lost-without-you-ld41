@@ -14,6 +14,9 @@ class Hero {
 
     this.hue = this.name === 'a' ? 130 : 210;
 
+    this.life = 1;
+    this.decay = 0.001;
+
     this.acceleration = new THREE.Vector3();
     this.velocity = new THREE.Vector3();
     this.accelerationGain = 0.01;
@@ -22,6 +25,7 @@ class Hero {
 
     this.lightPositionCurrent = new THREE.Vector3();
     this.lightPositionTarget = new THREE.Vector3();
+    this.lightDistanceBase = 5;
 
     this.observe();
     this.setupMesh();
@@ -53,12 +57,12 @@ class Hero {
   }
 
   setupLights() {
-    this.light1 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.75, 5, 2);
+    this.light1 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.75, this.lightDistanceBase, 2);
     this.light1.castShadow = false;
     this.light1.position.set(-0.25, 1.5, 0.25);
     this.mesh.add(this.light1);
 
-    this.light2 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.25, 5, 2);
+    this.light2 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.25, this.lightDistanceBase, 2);
     this.light2.castShadow = true;
     this.light2.position.copy(this.light1.position);
     this.mesh.add(this.light2);
@@ -165,9 +169,32 @@ class Hero {
     }
   }
 
+  collideHeros() {
+    if(this.game.heroA && this.game.heroB) {
+      let otherHero = this.name === 'a' ? this.game.heroB : this.game.heroA;
+      if(this.mesh.bbox.intersectsBox(otherHero.mesh.bbox)) {
+        console.log('you\'re winner!');
+      }
+    }
+  }
+
+  updateLightLife() {
+  //   if(this.life > 0) {
+  //     this.life -= this.decay;
+  //     this.light1.distance = 2 + this.lightDistanceBase * this.life;
+  //     this.light2.distance = 2 + this.lightDistanceBase * this.life;
+  //   } else {
+  //     console.log('ya died!');
+  //     this.light1.distance = 2;
+  //     this.light2.distance = 2;
+  //   }
+  }
+
   update() {
     this.move();
     this.updateLights();
+    this.collideHeros();
+    this.updateLightLife();
   }
 
 }

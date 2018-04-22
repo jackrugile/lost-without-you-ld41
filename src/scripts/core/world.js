@@ -42,6 +42,7 @@ class World {
   setupCameras() {
     this.fov = 75;
     this.camera = new THREE.PerspectiveCamera(this.fov, 0, 0.1, 1000);
+    this.camera.position.set(-5, 5, 5);
     this.cameraCurrent = new THREE.Vector3();
     this.cameraTarget = new THREE.Vector3();
     this.cameraLookAtCurrent = new THREE.Vector3();
@@ -62,19 +63,19 @@ class World {
 
   update() {
     this.orbit.update();
-    if(this.game.activeHero) {
-      this.cameraTarget.copy(this.game.activeHero.mesh.position);
-      this.cameraTarget.y = 5;
-      this.cameraTarget.z += 0;
+    // if(this.game.activeHero) {
+    //   this.cameraTarget.copy(this.game.activeHero.mesh.position);
+    //   this.cameraTarget.y = 5;
+    //   this.cameraTarget.z += 0;
 
-      this.cameraLookAtTarget.copy(this.game.activeHero.mesh.position);
+    //   this.cameraLookAtTarget.copy(this.game.activeHero.mesh.position);
 
-      this.cameraCurrent.lerp(this.cameraTarget, 0.1);
-      this.cameraLookAtCurrent.lerp(this.cameraLookAtTarget, 0.1);
+    //   this.cameraCurrent.lerp(this.cameraTarget, 0.1);
+    //   this.cameraLookAtCurrent.lerp(this.cameraLookAtTarget, 0.1);
 
-      this.camera.position.copy(this.cameraCurrent);
-      this.camera.lookAt(this.cameraLookAtCurrent);
-    }
+    //   this.camera.position.copy(this.cameraCurrent);
+    //   this.camera.lookAt(this.cameraLookAtCurrent);
+    // }
   }
 
   render() {

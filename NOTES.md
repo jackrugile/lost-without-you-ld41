@@ -1,7 +1,4 @@
 # TASKS
-- camera/hero switching
-- hero collisions
-- light/life depletion
 - fireflies
   - firefly collisions and movement
 - torches
@@ -21,27 +18,6 @@
 
 - can I use spatial hash for better collision perf?
 - adjust lightness of hero B blue
-
-# GENRE LIST
-
-- strategy
-- role playing
-- racing
-- first person shooter
-- puzzle
-- platformer
-- turn based
-- open world
-- arcade
-- fighting
-- simulation
-- adventure
-- defense
-- idle
-- sports
-- board game
-- educational
-- typing
 
 # NAMES
 
@@ -76,24 +52,19 @@
 - seek the light
 - light unite
 - light and unite
+- lost without you
 
 # GENRE
 
 - solo-coop-turn-based action-puzzle
 
-# MAPS / MAZES
-
-0 - walkable
-1 - player 1
-2 - player 2
-3 - wall
-4 - torch
-
-var maze = '
-3 0 0 0 1 2
-0 0 0 4 1 0
-1 1 1 0 1 0
-';
-
 # NICE TO HAVES
 - catch a high energy firefly orb to create a permanent light source
+
+# INTRO / INSTRUCTIONS
+
+- two friends are lost in the darkness
+---
+- use arrow keys/WASD to move each friend for 5 seconds at a time
+- reunite the two friends before they run out of light
+- collect fireflies and torches to boost your light supply
