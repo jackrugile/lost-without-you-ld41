@@ -11,6 +11,13 @@ class LevelManager {
     };
   }
 
+  set(level) {
+    if(this.current) {
+      this.current.destroy();
+    }
+    this.build(level);
+  }
+
   build(level) {
     this.current = this.levels[level];
     this.current.build();

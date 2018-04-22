@@ -172,7 +172,7 @@ class Hero {
     if(this.game.heroA && this.game.heroB) {
       let otherHero = this.name === 'a' ? this.game.heroB : this.game.heroA;
       if(this.mesh.bbox.intersectsBox(otherHero.mesh.bbox)) {
-        console.log('you\'re winner!');
+        this.game.stateManager.set('win');
       }
     }
   }
@@ -198,24 +198,41 @@ class Hero {
   }
 
   updateLightLife() {
-    // if(this.isActive) {
-    //   if(this.life > 0) {
-    //     this.life -= this.decay;
-    //     this.light1.distance = 2 + this.lightDistanceBase * this.life;
-    //     this.light2.distance = 2 + this.lightDistanceBase * this.life;
-    //   } else {
-    //     console.log('ya died!');
-    //     this.light1.distance = 2;
-    //     this.light2.distance = 2;
-    //   }
-    // }
+    if(this.isActive) {
+      if(this.life > 0) {
+        this.life -= this.decay;
+        this.light1.distance = 2 + this.lightDistanceBase * this.life;
+        this.light2.distance = 2 + this.lightDistanceBase * this.life;
+      } else {
+        this.light1.distance = 2;
+        this.light2.distance = 2;
+        this.game.stateManager.set('lose');
+      }
+    }
 
-    let intensity = 0.88 + Math.sin(Date.now() * 0.004) * 0.12;
-    this.light1.intensity = this.light1Intensity * intensity;
-    this.light2.intensity = this.light2Intensity * intensity;
+    //let intensity = 0.88 + Math.sin(Date.now() * 0.004) * 0.12;
+    //this.light1.intensity = this.light1Intensity * intensity;
+    //this.light2.intensity = this.light2Intensity * intensity;
+  }
+
+  destroy() {
+    this.game.world.scene.remove(this.light1);
+    this.light1 = null;
+
+    this.game.world.scene.remove(this.light2);
+    this.light2 = null;
+
+    this.game.world.scene.remove(this.mesh);
+    this.geometry.dispose();
+    this.material.dispose();
+    this.mesh = null;
   }
 
   update() {
+    if(this.game.stateManager.current != 'play' || !this.mesh) {
+      return;
+    }
+
     this.move();
     this.updateLights();
     this.collideHeros();

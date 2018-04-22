@@ -1,5 +1,8 @@
 const env = require('../env.js');
+const LoseState = require('./lose.js');
+const MenuState = require('./menu.js');
 const PlayState = require('./play.js');
+const WinState = require('./win.js');
 
 class StateManager {
 
@@ -7,7 +10,10 @@ class StateManager {
     this.env = env;
     this.game = game;
     this.states = {
-      play: new PlayState(this.game, 'play')
+      lose: new LoseState(this.game, 'lose'),
+      menu: new MenuState(this.game, 'menu'),
+      play: new PlayState(this.game, 'play'),
+      win: new WinState(this.game, 'win')
     };
   }
 

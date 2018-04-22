@@ -61,10 +61,10 @@ class World {
     this.cameraLookAtCurrent = new THREE.Vector3();
     this.cameraLookAtTarget = new THREE.Vector3();
 
-    this.orbit = new THREE.OrbitControls(this.camera, this.game.dom.container);
-    this.orbit.enableDamping = true;
-    this.orbit.dampingFactor = 0.2;
-    this.orbit.enableKeys = false;
+    // this.orbit = new THREE.OrbitControls(this.camera, this.game.dom.container);
+    // this.orbit.enableDamping = true;
+    // this.orbit.dampingFactor = 0.2;
+    // this.orbit.enableKeys = false;
   }
 
   setupComposer() {
@@ -105,8 +105,8 @@ class World {
   }
 
   update() {
-    this.orbit.update();
-    if(this.game.activeHero) {
+    //this.orbit.update();
+    if(this.game.activeHero && this.game.stateManager.current === 'play') {
       this.cameraTarget.copy(this.game.activeHero.mesh.position);
       this.cameraTarget.y = 5;
       this.cameraTarget.z += 0;

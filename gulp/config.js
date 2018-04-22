@@ -33,8 +33,8 @@ module.exports = {
   // Meta for frontend static templates
   "meta": {
     "google_analytics": "",
-    "site_title": "LD41",
-    "site_description": "Ludum Dare 41",
+    "site_title": "Lost Without You",
+    "site_description": "Lost Without You | Ludum Dare 41",
     "site_keywords": "",
     "robots": () => {
       if( process.env.NODE_ENV == "production" ) {

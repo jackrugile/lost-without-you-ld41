@@ -90,9 +90,13 @@ class Firefly {
     this.dead = true;
     this.game.world.scene.remove(this.mesh);
     this.mesh = null;
+    this.glowMesh = null;
   }
 
   update() {
+    if(this.game.stateManager.current != 'play') {
+      return;
+    }
     if(!this.dead) {
       this.move();
       this.pulse();

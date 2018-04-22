@@ -39,6 +39,7 @@ class Game {
   setupDOM() {
     this.dom = {};
     this.dom.container = document.querySelector('.container');
+    this.dom.scaler = document.querySelector('.scaler');
   }
 
   setupTime() {
@@ -51,7 +52,8 @@ class Game {
 
   setupStates() {
     this.stateManager = new StateManager(this);
-    this.stateManager.set('play');
+    //this.stateManager.set('play');
+    this.stateManager.set('menu');
   }
 
   setupFireflies() {
@@ -95,10 +97,7 @@ class Game {
     });
 
     this.levelManager = new LevelManager(this);
-    this.levelManager.build('alpha');
-
-    this.heroA.setActive(true);
-    this.activeHero = this.heroA;
+    this.currentLevel = 'alpha';
   }
 
   setupInputs() {
@@ -156,6 +155,8 @@ class Game {
 
     this.dom.container.style.width = `${this.resolution.x}px`;
     this.dom.container.style.height = `${this.resolution.y}px`;
+
+    this.dom.scaler.style.transform = `scale(${this.resolution.y / 1080})`;
 
     this.domOffset = {
       x: Math.round(this.dom.container.offsetLeft),

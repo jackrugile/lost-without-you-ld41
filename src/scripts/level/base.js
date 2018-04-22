@@ -17,6 +17,7 @@ class BaseLevel {
 
   build() {
     this.parseMaze();
+    this.setupLights();
     this.setupGround();
     this.setupWalls();
     this.setupHeros();
@@ -39,24 +40,27 @@ class BaseLevel {
     this.mazeCols = this.mazeArray.length;
   }
 
+  setupLights() {
+    this.ambientLight = new THREE.AmbientLight(0x111111);
+    this.game.world.scene.add(this.ambientLight);
+  }
+
   setupGround() {
-    let geometry = new THREE.PlaneBufferGeometry(this.mazeRows, this.mazeCols);
-    geometry.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-    let material = new THREE.MeshPhongMaterial({
+    this.groundGeometry = new THREE.PlaneBufferGeometry(this.mazeRows, this.mazeCols);
+    this.groundGeometry.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+    this.groundMaterial = new THREE.MeshPhongMaterial({
       color: 0x666666,
       specular: 0x333333,
       shininess: 30
     });
-    let mesh = new THREE.Mesh(geometry, material);
-    mesh.castShadow = false;
-    mesh.receiveShadow = true;
-    mesh.position.set(0, 0, 0);
-    this.game.world.scene.add(mesh);
+    this.groundMesh = new THREE.Mesh(this.groundGeometry, this.groundMaterial);
+    this.groundMesh.castShadow = false;
+    this.groundMesh.receiveShadow = true;
+    this.groundMesh.position.set(0, 0, 0);
+    this.game.world.scene.add(this.groundMesh);
   }
 
   setupWalls() {
-    this.wallGroup = new THREE.Object3D();
-    this.game.world.scene.add(this.wallGroup);
     this.walls = [];
     this.mazeArray.forEach((line, i) => {
       line.forEach((item, j) => {
@@ -103,15 +107,47 @@ class BaseLevel {
           let x = j - this.mazeCols / 2 + 0.5;
           let y = 0.29;
           let z = i - this.mazeRows / 2 + 0.5;
-          //if(Math.random() < 0.5) {
           this.game.fireflies.push(new Firefly(this.game, new THREE.Vector3(x, y, z)));
-          // } else {
-          //   this.game.fireflies.push(new Firefly(this.game, new THREE.Vector3(x, y, z)));
-          //   this.game.fireflies.push(new Firefly(this.game, new THREE.Vector3(x, y, z)));
-          // }
         }
       });
     });
+  }
+
+  destroy() {
+    let i = this.game.fireflies.length;
+    while(i--) {
+      let firefly = this.game.fireflies[i];
+      firefly.destroy();
+    }
+    this.game.fireflies.length = 0;
+
+    this.game.heroA.destroy();
+    this.game.heroB.destroy();
+    this.game.heroA = null;
+    this.game.heroB = null;
+    this.game.activeHero = null;
+
+    this.game.world.scene.remove(this.ambientLight);
+    this.ambientLight = null;
+
+    this.game.world.scene.remove(this.groundMesh);
+    this.groundGeometry.dispose();
+    this.groundMaterial.dispose();
+    this.groundMesh = null;
+
+    this.mazeTrimmed = null;
+    this.mazeLines = null;
+    this.mazeArray = null;
+    this.mazeRows = null;
+    this.mazeCols = null;
+
+    let j = this.walls.length;
+    while(j--) {
+      let wall = this.walls[j];
+      this.game.world.scene.remove(wall);
+      wall = null;
+    }
+    this.walls.length = 0;
   }
 
   update() {

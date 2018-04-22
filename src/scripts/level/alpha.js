@@ -27,9 +27,6 @@ class AlphaLevel extends BaseLevel {
       3 1 0 0 3 3 3 3 3 0 0 0 0 0 3 3 0 0 0 3
       3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
     `;
-
-    this.ambientLight = new THREE.AmbientLight(0x111111);
-    this.game.world.scene.add(this.ambientLight);
   }
 
   update() {
