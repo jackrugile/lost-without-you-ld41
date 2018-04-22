@@ -54,27 +54,34 @@ class Firefly {
   }
 
   move() {
-    this.velocity = this.calc.map(Math.sin(Date.now() * 0.0025 + this.pulseOffset), -1, 1, this.velocityBase * 0.25, this.velocityBase);
-    this.angle += this.calc.rand(-0.5, 0.5);
+    let distHeroThreshold = 1;
+    let distToHeroA = this.mesh.position.distanceTo(this.game.heroA.mesh.position);
+    let distToHeroB = this.mesh.position.distanceTo(this.game.heroB.mesh.position);
+    let refHero = this.game.heroA;
+    let refDist = distToHeroA;
+    if(distToHeroA > distToHeroB) {
+      refHero = this.game.heroB;
+      refDist = distToHeroB;
+    }
+
+    if(refDist < distHeroThreshold) {
+      let dz = this.mesh.position.z - refHero.mesh.position.z;
+      let dx = this.mesh.position.x - refHero.mesh.position.x;
+      this.angle = Math.atan2(dz, dx) + Math.PI;
+      this.velocity = 0.05 * (distHeroThreshold - refDist);
+    } else {
+      this.velocity = this.calc.map(Math.sin(Date.now() * 0.0025 + this.pulseOffset), -1, 1, this.velocityBase * 0.25, this.velocityBase);
+      this.angle += this.calc.rand(-0.5, 0.5);
+      if(this.mesh.position.distanceTo(this.origin) > this.range) {
+        let dz = this.mesh.position.z - this.origin.z;
+        let dx = this.mesh.position.x - this.origin.x;
+        this.angle = Math.atan2(dz, dx) + Math.PI;
+      }
+    }
+
     this.mesh.position.x += Math.cos(this.angle) * this.velocity;
     this.mesh.position.z += Math.sin(this.angle) * this.velocity;
 
-    if(this.mesh.position.x > this.origin.x + this.range) {
-      this.mesh.position.x = this.origin.x + this.range;
-      this.angle += Math.PI / 2;
-    }
-    if(this.mesh.position.x < this.origin.x - this.range) {
-      this.mesh.position.x = this.origin.x - this.range;
-      this.angle += Math.PI / 2;
-    }
-    if(this.mesh.position.z > this.origin.z + this.range) {
-      this.mesh.position.z = this.origin.z + this.range;
-      this.angle += Math.PI / 2;
-    }
-    if(this.mesh.position.z < this.origin.z - this.range) {
-      this.mesh.position.z = this.origin.z - this.range;
-      this.angle += Math.PI / 2;
-    }
     this.mesh.bbox.setFromObject(this.mesh);
   }
 

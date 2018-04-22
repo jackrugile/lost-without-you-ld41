@@ -22,6 +22,7 @@ class BaseLevel {
     this.setupWalls();
     this.setupHeros();
     this.setupFireflies();
+    console.log(`${this.name} level built`);
   }
 
   parseMaze() {

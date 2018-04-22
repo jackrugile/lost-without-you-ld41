@@ -139,6 +139,8 @@ class World {
     this.renderer.setPixelRatio(e.dpr);
     this.renderer.setSize(e.resolution.x, e.resolution.y);
     this.composer.setSize(e.resolution.x * e.dpr, e.resolution.y * e.dpr);
+
+    this.filmPass.uniforms.sCount.value = e.resolution.y * 2;
   }
 
   onGameAnimate() {

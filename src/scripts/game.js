@@ -97,7 +97,7 @@ class Game {
     });
 
     this.levelManager = new LevelManager(this);
-    this.currentLevel = 'alpha';
+    //this.currentLevel = 'alpha';
   }
 
   setupInputs() {
@@ -113,7 +113,7 @@ class Game {
   setupSounds() {
     this.sounds = {
       fireflyCollect: new Howl({
-        src: ['/sounds/firefly-collect-1.wav'],
+        src: ['./sounds/firefly-collect-1.wav'],
         volume: 1
       })
     };

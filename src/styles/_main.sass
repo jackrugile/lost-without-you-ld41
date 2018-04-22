@@ -45,13 +45,13 @@ body
     display: flex
 
 .state-menu
-  background: radial-gradient(#222, #111)
+  background: radial-gradient(#181818, #000)
 
 .state-menu-title
   color: #fff
   font-size: 160px
   line-height: 1
-  margin-bottom: 30px
+  margin-bottom: 40px
   text-align: center
   *:nth-child(1)
     color: hsl(130, 90%, 60%)
@@ -69,12 +69,44 @@ body
   font-size: 30px
   font-weight: 300
   line-height: 1
-  margin-bottom: 40px
-  padding-bottom: 40px
+  margin-bottom: 70px
+  padding-bottom: 70px
   text-align: center
   span
     color: #fff
     font-weight: 500
+
+.state-menu-levels
+  display: flex
+
+.state-menu-level
+  align-items: center
+  border: 2px solid #555
+  color: #555
+  cursor: pointer
+  display: flex
+  font-size: 24px
+  font-weight: 500
+  height: 64px
+  line-height: 1
+  margin-right: 40px;
+  justify-content: center
+  text-align: center
+  transition: all 200ms
+  width: 64px
+  &.state-menu-level-available
+    border-color: #fff
+    color: #fff
+  &.state-menu-level-beat
+    background: #fff
+    border-color: #fff
+    color: #000
+  &:last-child
+    margin-right: 0
+  &:hover
+    border-color: #fff
+    box-shadow: 0 0 0 8px hsla(0, 0%, 100%, 0.1)
+    transform: scale(1.1)
 
 .state-instructions
   background: hsla(60, 100%, 50%, 0.2)
@@ -91,4 +123,5 @@ body
 h2
   color: #fff
   font-size: 128px
+  font-weight: 500
   text-align: center

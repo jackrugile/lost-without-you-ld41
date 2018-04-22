@@ -1,6 +1,9 @@
 # TASKS
 
-- attract fireflies to hero
+- level state storage
+  - beaten?
+  - available?
+  - best time?
 - UI for overall time, time left in turn, life left
 - menu/level select
 - level complete
@@ -24,7 +27,12 @@
 - can I use spatial hash for better collision perf?
 - torches
   - touch collisions
-- dynamic scanline size based on resolution
+- remove modernizr bloat
+- find bottleneck on laptop
+  - post process?
+  - resolution?
+  - antialias?
+  - no spatial hash on cube collisions?
 
 # SOUNDS
 
