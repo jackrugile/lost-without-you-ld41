@@ -1,23 +1,13 @@
 const BaseState = require('./base');
-const Firefly = require('../entities/firefly');
 
 class PlayState extends BaseState {
 
   constructor(game, name) {
     super(game, name);
 
-    // setInterval(() => {
-    //   this.switchHero();
-    // }, 5000);
-
-    this.setupFireflies();
-  }
-
-  setupFireflies() {
-    this.fireflies = [];
-    this.fireflies.push(new Firefly(this.game, new THREE.Vector3(-7.5, 0.15, 7.5)));
-    this.fireflies.push(new Firefly(this.game, new THREE.Vector3(-7, 0.15, 7.5)));
-
+    setInterval(() => {
+      this.switchHero();
+    }, 5000);
   }
 
   switchHero() {

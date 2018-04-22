@@ -59,12 +59,10 @@ class Hero {
   setupLights() {
     this.light1 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.75, this.lightDistanceBase, 2);
     this.light1.castShadow = false;
-    this.light1.position.set(-0.25, 1.5, 0.25);
     this.mesh.add(this.light1);
 
     this.light2 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 90%, 50%)`), 0.25, this.lightDistanceBase, 2);
     this.light2.castShadow = true;
-    this.light2.position.copy(this.light1.position);
     this.mesh.add(this.light2);
   }
 
@@ -148,11 +146,10 @@ class Hero {
   }
 
   updateLights() {
-    // -0.25, 1.5, 0.25
     this.lightAngle = Math.atan2(this.velocity.z, this.velocity.x);
     this.lightDistance = Math.sqrt(this.velocity.z * this.velocity.z + this.velocity.x * this.velocity.x) * 10;
     this.lightPositionTarget.x = Math.cos(this.lightAngle) * this.lightDistance;
-    this.lightPositionTarget.y = 1.5;
+    this.lightPositionTarget.y = 1.2;
     this.lightPositionTarget.z = Math.sin(this.lightAngle) * this.lightDistance;
 
     this.lightPositionCurrent.lerp(this.lightPositionTarget, 0.05);

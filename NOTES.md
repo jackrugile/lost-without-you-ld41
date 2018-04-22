@@ -1,8 +1,5 @@
 # TASKS
-- fireflies
-  - firefly collisions and movement
-- torches
-  - touch collisions
+  - firefly collisions
 - UI for overall time, time left in turn, life left
 - menu/level select
 - sound
@@ -18,6 +15,9 @@
 
 - can I use spatial hash for better collision perf?
 - adjust lightness of hero B blue
+- don't create multiple geometries or materials if I don't have to
+- torches
+  - touch collisions
 
 # NAMES
 

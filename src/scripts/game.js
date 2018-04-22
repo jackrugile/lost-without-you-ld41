@@ -1,4 +1,6 @@
 const env = require('./env.js');
+const Calc = require('./utils/calc');
+const Ease = require('./utils/ease');
 const Keys = require('./input/keys');
 const LevelManager = require('./level/manager');
 const StateManager = require('./state/manager');
@@ -15,6 +17,9 @@ class Game {
 
   build() {
     this.env = env;
+    this.calc = new Calc();
+    this.ease = new Ease();
+
     this.debug = location.hash.indexOf('debug') > -1;
     this.resolution = {};
 
@@ -22,6 +27,7 @@ class Game {
     this.setupTime();
     this.setupWorld();
     this.setupStates();
+    this.setupFireflies();
     this.setupLevels();
     this.setupInputs();
     this.setupSounds();
@@ -48,7 +54,46 @@ class Game {
     this.stateManager.set('play');
   }
 
+  setupFireflies() {
+    this.fireflyGeometry = new THREE.SphereBufferGeometry(0.01, 0.01, 72, 72);
+    this.fireflyMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffffff
+    });
+
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    let size = 512;
+    canvas.width = size;
+    canvas.height = size;
+    let glow_gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    let steps = 20;
+    for(let i = 0; i < steps; i++) {
+      let p = i / (steps - 1);
+      let a = this.calc.map(this.ease.outExpo(p, 0, 1, 1), 0, 1, 1, 0);
+      glow_gradient.addColorStop(p, `hsla(60, 100%, 40%, ${a})`);
+    }
+    ctx.fillStyle = glow_gradient;
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.fill();
+    let texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    this.fireflyGlowMaterial = new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+      blending: THREE.AdditiveBlending
+    });
+    this.fireflies = [];
+  }
+
   setupLevels() {
+    this.wallGeometry = new THREE.BoxBufferGeometry(1, 1, 1);
+    this.wallMaterial = new THREE.MeshPhongMaterial({
+      color: 0x666666,
+      specular: 0x666666,
+      shininess: 20
+    });
+
     this.levelManager = new LevelManager(this);
     this.levelManager.build('alpha');
 

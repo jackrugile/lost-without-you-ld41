@@ -1,4 +1,5 @@
 const env = require('../env.js');
+const Firefly = require('../entities/firefly');
 const Hero = require('../entities/hero');
 
 class BaseLevel {
@@ -19,6 +20,7 @@ class BaseLevel {
     this.setupGround();
     this.setupWalls();
     this.setupHeros();
+    this.setupFireflies();
   }
 
   parseMaze() {
@@ -61,14 +63,9 @@ class BaseLevel {
         if(item === 3) {
           let x = j - this.mazeCols / 2;
           let z = i - this.mazeRows / 2;
-          let geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-          let material = new THREE.MeshPhongMaterial({
-            color: 0x666666,
-            specular: 0x666666,
-            shininess: 20
-          });
-          let mesh = new THREE.Mesh(geometry, material);
+          let mesh = new THREE.Mesh(this.game.wallGeometry, this.game.wallMaterial);
           mesh.castShadow = true;
+          mesh.receiveShadow = true;
           mesh.position.set(x + 0.5, 0.5, z + 0.5);
           mesh.bbox = new THREE.Box3();
           mesh.bbox.setFromObject(mesh);
@@ -93,6 +90,20 @@ class BaseLevel {
           if(item === 2) {
             this.game.heroB = new Hero(this.game, 'b', origin);
           }
+        }
+      });
+    });
+  }
+
+  setupFireflies() {
+    this.mazeArray.forEach((line, i) => {
+      line.forEach((item, j) => {
+        let off = (i % 6 === 0) ? 1 : 0;
+        if(item === 0 && (i % 3) === 0 && ((j + off) % 3) === 0) {
+          let x = j - this.mazeCols / 2 + 0.5;
+          let y = 0.5;
+          let z = i - this.mazeRows / 2 + 0.5;
+          this.game.fireflies.push(new Firefly(this.game, new THREE.Vector3(x, y, z)));
         }
       });
     });
