@@ -18,7 +18,7 @@ class Calc {
     }
     let random = Math.random();
     if(ease) {
-      random = ease(Math.random(), 0, 1, 1);
+      random = ease(random, 0, 1, 1);
     }
     return random * (max - min) + min;
   }
@@ -41,9 +41,9 @@ class Calc {
     }
     let random = Math.random();
     if(ease) {
-      random = ease(Math.random(), 0, 1, 1);
+      random = ease(random, 0, 1, 1);
     }
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(random * (max - min + 1)) + min;
   }
 
   /*
@@ -184,7 +184,7 @@ class Calc {
     return {
       x: i % w,
       y: Math.floor(i / w)
-    }
+    };
   }
 
 }

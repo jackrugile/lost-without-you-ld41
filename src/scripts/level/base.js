@@ -1,4 +1,5 @@
 const env = require('../env.js');
+const Hero = require('../entities/hero');
 
 class BaseLevel {
 
@@ -15,8 +16,9 @@ class BaseLevel {
 
   build() {
     this.parseMaze();
-    this.createGround();
-    this.createWalls();
+    this.setupGround();
+    this.setupWalls();
+    this.setupHeros();
   }
 
   parseMaze() {
@@ -35,11 +37,13 @@ class BaseLevel {
     this.mazeCols = this.mazeArray.length;
   }
 
-  createGround() {
+  setupGround() {
     let geometry = new THREE.PlaneBufferGeometry(this.mazeRows, this.mazeCols);
     geometry.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
     let material = new THREE.MeshPhongMaterial({
-      color: 0x666666
+      color: 0x666666,
+      specular: 0x333333,
+      shininess: 30
     });
     let mesh = new THREE.Mesh(geometry, material);
     mesh.castShadow = false;
@@ -48,7 +52,7 @@ class BaseLevel {
     this.game.world.scene.add(mesh);
   }
 
-  createWalls() {
+  setupWalls() {
     this.wallGroup = new THREE.Object3D();
     this.game.world.scene.add(this.wallGroup);
     this.walls = [];
@@ -59,14 +63,36 @@ class BaseLevel {
           let z = i - this.mazeRows / 2;
           let geometry = new THREE.BoxBufferGeometry(1, 1, 1);
           let material = new THREE.MeshPhongMaterial({
-            color: 0x666666
+            color: 0x666666,
+            specular: 0x666666,
+            shininess: 20
           });
           let mesh = new THREE.Mesh(geometry, material);
           mesh.castShadow = true;
-          mesh.receiveShadow = true;
           mesh.position.set(x + 0.5, 0.5, z + 0.5);
+          mesh.bbox = new THREE.Box3();
+          mesh.bbox.setFromObject(mesh);
           this.walls.push(mesh);
           this.game.world.scene.add(mesh);
+        }
+      });
+    });
+  }
+
+  setupHeros() {
+    this.mazeArray.forEach((line, i) => {
+      line.forEach((item, j) => {
+        if(item === 1 || item === 2) {
+          let x = j - this.mazeCols / 2;
+          let y = 0;
+          let z = i - this.mazeRows / 2;
+          let origin = new THREE.Vector3(x + 0.5, y, z + 0.5);
+          if(item === 1) {
+            this.game.heroA = new Hero(this.game, 'a', origin);
+          }
+          if(item === 2) {
+            //this.heroB = new Hero(this.game, 'b', origin);
+          }
         }
       });
     });

@@ -1,4 +1,6 @@
 const env = require('./env.js');
+const Keys = require('./input/keys');
+const LevelManager = require('./level/manager');
 const StateManager = require('./state/manager');
 const Time = require('./core/time');
 const World = require('./core/world');
@@ -20,6 +22,7 @@ class Game {
     this.setupTime();
     this.setupWorld();
     this.setupStates();
+    this.setupLevels();
     this.setupInputs();
     this.setupSounds();
     this.onResize();
@@ -45,7 +48,19 @@ class Game {
     this.stateManager.set('play');
   }
 
+  setupLevels() {
+    this.levelManager = new LevelManager(this);
+    this.levelManager.build('alpha');
+  }
+
   setupInputs() {
+    this.keys = new Keys();
+    this.dir = {
+      up: false,
+      down: false,
+      left: false,
+      right: false
+    };
   }
 
   setupSounds() {
@@ -66,8 +81,9 @@ class Game {
 
   observe() {
     window.addEventListener('resize', () => this.onResize());
-    window.addEventListener('keydown', (e) => this.onKeydown(e));
-    window.addEventListener('keyup', (e) => this.onKeyup(e));
+
+    this.env.eventful.on('dir-pressed', (e) => this.onDirPressed(e));
+    this.env.eventful.on('dir-released', (e) => this.onDirReleased(e));
   }
 
   onResize() {
@@ -102,24 +118,12 @@ class Game {
     });
   }
 
-  onKeydown(e) {
-    e;
+  onDirPressed(e) {
+    this.dir[e.dir] = true;
   }
 
-  onKeyup(e) {
-    e;
-  }
-
-  onPointerStart(e) {
-    e;
-  }
-
-  onPointerMove(e) {
-    e;
-  }
-
-  onPointerEnd(e) {
-    e;
+  onDirReleased(e) {
+    this.dir[e.dir] = false;
   }
 
   start() {

@@ -1,3 +1,28 @@
+# TASKS
+- camera follow
+- camera smoothing
+- camera/hero switching
+- hero collisions
+- light/life depletion
+- fireflies
+  - firefly collisions and movement
+- torches
+  - touch collisions
+- UI for overall time, time left in turn, life left
+- menu/level select
+- sound
+- music
+- loader
+- juice
+  - particle systems
+  - camera shake
+  - light flashes
+  - custom shaders for bloom/noise
+
+# GENERAL
+
+- can I use spatial hash for better collision perf?
+
 # GENRE LIST
 
 - strategy

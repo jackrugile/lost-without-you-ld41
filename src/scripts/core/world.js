@@ -40,9 +40,12 @@ class World {
   }
 
   setupCameras() {
-    this.fov = 50;
+    this.fov = 75;
     this.camera = new THREE.PerspectiveCamera(this.fov, 0, 0.1, 1000);
-    this.camera.position.set(-5, 2.5, 5);
+    this.cameraCurrent = new THREE.Vector3();
+    this.cameraTarget = new THREE.Vector3();
+    this.cameraLookAtCurrent = new THREE.Vector3();
+    this.cameraLookAtTarget = new THREE.Vector3();
 
     this.orbit = new THREE.OrbitControls(this.camera, this.game.dom.container);
     this.orbit.enableDamping = true;
@@ -59,6 +62,19 @@ class World {
 
   update() {
     this.orbit.update();
+    if(this.game.heroA) {
+      this.cameraTarget.copy(this.game.heroA.mesh.position);
+      this.cameraTarget.y = 10;
+      this.cameraTarget.z += 0;
+
+      this.cameraLookAtTarget.copy(this.game.heroA.mesh.position);
+
+      this.cameraCurrent.lerp(this.cameraTarget, 0.1);
+      this.cameraLookAtCurrent.lerp(this.cameraLookAtTarget, 0.1);
+
+      this.camera.position.copy(this.cameraCurrent);
+      this.camera.lookAt(this.cameraLookAtCurrent);
+    }
   }
 
   render() {
