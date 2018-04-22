@@ -91,7 +91,7 @@ class BaseLevel {
             this.game.heroA = new Hero(this.game, 'a', origin);
           }
           if(item === 2) {
-            //this.heroB = new Hero(this.game, 'b', origin);
+            this.game.heroB = new Hero(this.game, 'b', origin);
           }
         }
       });

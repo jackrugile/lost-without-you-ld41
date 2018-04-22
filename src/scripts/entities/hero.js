@@ -10,6 +10,8 @@ class Hero {
     this.name = name;
     this.origin = origin;
 
+    this.isActive = false;
+
     this.hue = this.name === 'a' ? 130 : 210;
 
     this.acceleration = new THREE.Vector3();
@@ -77,12 +79,14 @@ class Hero {
     this.colliding.left = false;
     this.colliding.right = false;
 
-    if(this.game.dir.left && !this.colliding.left) {
-      this.acceleration.x = -this.accelerationGain;
-    } else if(this.game.dir.right && !this.colliding.right) {
-      this.acceleration.x = this.accelerationGain;
-    } else {
-      this.acceleration.x = 0;
+    if(this.isActive) {
+      if(this.game.dir.left && !this.colliding.left) {
+        this.acceleration.x = -this.accelerationGain;
+      } else if(this.game.dir.right && !this.colliding.right) {
+        this.acceleration.x = this.accelerationGain;
+      } else {
+        this.acceleration.x = 0;
+      }
     }
     this.velocity.x += this.acceleration.x;
     this.velocity.x *= this.velocityFriction;
@@ -107,12 +111,14 @@ class Hero {
       }
     }
 
-    if(this.game.dir.up && !this.colliding.up) {
-      this.acceleration.z = -this.accelerationGain;
-    } else if(this.game.dir.down && !this.colliding.down) {
-      this.acceleration.z = this.accelerationGain;
-    } else {
-      this.acceleration.z = 0;
+    if(this.isActive) {
+      if(this.game.dir.up && !this.colliding.up) {
+        this.acceleration.z = -this.accelerationGain;
+      } else if(this.game.dir.down && !this.colliding.down) {
+        this.acceleration.z = this.accelerationGain;
+      } else {
+        this.acceleration.z = 0;
+      }
     }
     this.velocity.z += this.acceleration.z;
     this.velocity.z *= this.velocityFriction;
@@ -145,10 +151,18 @@ class Hero {
     this.lightPositionTarget.y = 1.5;
     this.lightPositionTarget.z = Math.sin(this.lightAngle) * this.lightDistance;
 
-    this.lightPositionCurrent.lerp(this.lightPositionTarget, 0.1);
+    this.lightPositionCurrent.lerp(this.lightPositionTarget, 0.05);
 
     this.light1.position.copy(this.lightPositionCurrent);
     this.light2.position.copy(this.lightPositionCurrent);
+  }
+
+  setActive(active) {
+    this.isActive = active;
+    if(!active) {
+      this.acceleration.x = 0;
+      this.acceleration.z = 0;
+    }
   }
 
   update() {

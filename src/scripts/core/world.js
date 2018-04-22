@@ -62,12 +62,12 @@ class World {
 
   update() {
     this.orbit.update();
-    if(this.game.heroA) {
-      this.cameraTarget.copy(this.game.heroA.mesh.position);
-      this.cameraTarget.y = 10;
+    if(this.game.activeHero) {
+      this.cameraTarget.copy(this.game.activeHero.mesh.position);
+      this.cameraTarget.y = 5;
       this.cameraTarget.z += 0;
 
-      this.cameraLookAtTarget.copy(this.game.heroA.mesh.position);
+      this.cameraLookAtTarget.copy(this.game.activeHero.mesh.position);
 
       this.cameraCurrent.lerp(this.cameraTarget, 0.1);
       this.cameraLookAtCurrent.lerp(this.cameraLookAtTarget, 0.1);

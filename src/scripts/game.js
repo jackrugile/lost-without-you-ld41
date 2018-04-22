@@ -51,6 +51,9 @@ class Game {
   setupLevels() {
     this.levelManager = new LevelManager(this);
     this.levelManager.build('alpha');
+
+    this.heroA.setActive(true);
+    this.activeHero = this.heroA;
   }
 
   setupInputs() {
@@ -89,7 +92,6 @@ class Game {
   onResize() {
     let ratioWin = window.innerWidth / window.innerHeight;
     let ratioGame = 16 / 9;
-
 
     if(ratioWin > ratioGame) {
       this.resolution.x = window.innerHeight * ratioGame;

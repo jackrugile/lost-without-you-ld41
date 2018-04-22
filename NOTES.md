@@ -1,6 +1,4 @@
 # TASKS
-- camera follow
-- camera smoothing
 - camera/hero switching
 - hero collisions
 - light/life depletion
@@ -22,6 +20,7 @@
 # GENERAL
 
 - can I use spatial hash for better collision perf?
+- adjust lightness of hero B blue
 
 # GENRE LIST
 
