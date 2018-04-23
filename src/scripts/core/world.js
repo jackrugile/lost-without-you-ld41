@@ -49,7 +49,7 @@ class World {
     });
     this.renderer.autoClear = false;
     this.renderer.shadowMap.enabled = true;
-    //this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.game.dom.container.appendChild(this.renderer.domElement);
   }
 
