@@ -1,9 +1,11 @@
 const env = require('../env.js');
+const Utils = require('../utils/utils');
 
 class BaseState {
 
   constructor(game, name) {
     this.env = env;
+    this.utils = new Utils();
     this.game = game;
     this.name = name;
     this.setupDOM();

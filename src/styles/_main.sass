@@ -142,7 +142,6 @@ h2
 //-------------------------------------------------
 
 .state-play
-  //background: hsla(120, 100%, 50%, 0.2)
   font-size: 40px
 
 .state-play-level-wrap
@@ -156,13 +155,10 @@ h2
   margin-bottom: 10px
 
 .state-play-level-time
-  font-size: 30px
+  font-family: 'Roboto Mono', monospace
+  font-size: 26px
   font-weight: 400
-  span
-    display: inline-block
-    margin: 0 3px
-    position: relative
-    top: -0.14em
+  letter-spacing: -0.05em
 
 .state-play-hero-wrap
   align-items: center
@@ -170,12 +166,16 @@ h2
   font-size: 35px
   left: 60px
   line-height: 1
+  opacity: 0.25
   position: absolute
   text-align: right
+  transition: opacity 300ms
+  &.state-play-hero-wrap-active
+    opacity: 1
   &.state-play-hero-a-wrap
     top: 60px
   &.state-play-hero-b-wrap
-    bottom: 60px
+    top: 160px
 
 .state-play-hero-title
   font-weight: 600
@@ -223,8 +223,9 @@ h2
 .state-play-hero-meter-light-bar
   background: #fff
   height: 100%
-  transform: translate3d(-50%, 0, 0)
+  transform-origin: 0% 50%
   width: 100%
+  will-change: transform
   &.state-play-hero-a-meter-light-bar
     //background: hsl($hero-a-hue, $hero-sat, $hero-lit)
   &.state-play-hero-b-meter-light-bar
@@ -244,8 +245,9 @@ h2
 
 .state-play-hero-meter-time-bar
   height: 100%
-  transform: translate3d(-50%, 0, 0)
+  transform-origin: 0% 50%
   width: 100%
+  will-change: transform
   &.state-play-hero-a-meter-time-bar
     background: hsl($hero-a-hue, $hero-sat, $hero-lit)
   &.state-play-hero-b-meter-time-bar

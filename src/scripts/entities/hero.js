@@ -15,8 +15,8 @@ class Hero {
     this.hue = this.name === 'a' ? 130 : 210;
 
     this.life = 1;
-    this.decay = 0.001;
-    this.decay = 0;
+    this.decay = 0.0015;
+    //this.decay = 0;
 
     this.acceleration = new THREE.Vector3();
     this.velocity = new THREE.Vector3();
@@ -192,7 +192,7 @@ class Hero {
   }
 
   collectFirefly() {
-    this.life += 0.5;
+    this.life += 0.2;
     this.life = this.calc.clamp(this.life, 0, 1);
     //this.game.sounds.fireflyCollect.rate(this.calc.rand(0.25, 0.6));
     this.game.sounds.fireflyCollect.play();

@@ -35,6 +35,7 @@
   - resolution?
   - antialias?
   - no spatial hash on cube collisions?
+- fix flickery scaling issues on meters
 
 # SOUNDS
 
