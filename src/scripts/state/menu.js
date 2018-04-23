@@ -27,7 +27,7 @@ class MenuState extends BaseState {
       let levelElem = this.dom.levels[i];
       let name = levelElem.getAttribute('data-name');
       levelElem.addEventListener('click', () => {
-        if(this.env.storage.get(name).available) {
+        if(this.env.storage.get(name).available || location.href.indexOf('debug') > -1) {
           this.game.currentLevel = name;
           if(name === 'level1') {
             this.game.stateManager.set('instructions');

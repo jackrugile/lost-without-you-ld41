@@ -230,13 +230,13 @@ class Hero {
     if(this.isActive) {
       if(this.life > 0) {
         this.life -= this.decay;
-        this.lightDistanceTarget = 2 + this.lightDistanceBase * this.life;
+        this.lightDistanceTarget = 0 + this.lightDistanceBase * this.life;
         this.lightDistanceCurrent += (this.lightDistanceTarget - this.lightDistanceCurrent) * 0.2;
         this.light1.distance = this.lightDistanceCurrent;
         this.light2.distance = this.lightDistanceCurrent;
       } else {
-        this.light1.distance = 2;
-        this.light2.distance = 2;
+        this.light1.distance = 0;
+        this.light2.distance = 0;
         this.game.lastLevelPlayed = this.game.currentLevel;
         this.game.lastLevelTime = this.game.currentState.elapsedTime;
         this.game.stateManager.set('lose');

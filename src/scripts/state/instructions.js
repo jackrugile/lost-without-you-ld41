@@ -30,10 +30,10 @@ class InstructionsState extends BaseState {
     if(!this.isActive) {
       return;
     }
-    this.tick++;
-    if(this.tick === this.tickMax) {
-      this.game.stateManager.set('play');
-    }
+    // this.tick++;
+    // if(this.tick === this.tickMax) {
+    //   this.game.stateManager.set('play');
+    // }
   }
 
 }

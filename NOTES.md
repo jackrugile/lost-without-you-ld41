@@ -1,9 +1,5 @@
 # TASKS
 
-- level complete
-  - add varying narration lines
-- level failed
-  - add varying narration lines
 - dialogue blocks
   - start of level
 - sound
@@ -60,12 +56,23 @@
 - storage reset
 - torches
 - campfires
+- respawning fireflies
+- maybe both people have to die, if the first person dies, they become immobile and have no controls
 
-# INTRO / INSTRUCTIONS
+# DIALOGUE
 
-- two friends are lost in the darkness
----
-- reunite Mary and Zoey before they run out of light
-- use ||||/WASD to navigate
-- controls alternate between friends
-- collect fireflies to boost your light
+Beginning of level1:
+What is this place?
+It’s so dark…
+
+Beginning of level2:
+Where are you, Zoey?
+I’m scared!
+
+Beginning of level3:
+Why are we always getting lost?
+We’ve gotta stop losing each other, Mary…
+
+Beginning of level4:
+Again?!
+Is this real life?
