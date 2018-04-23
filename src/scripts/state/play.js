@@ -13,10 +13,9 @@ class PlayState extends BaseState {
 
   reset() {
     this.game.levelManager.set(this.game.currentLevel);
-    // this.switchTick = 0;
-    // this.switchTickMax = 60 * 5;
+
     this.switchTime = 0;
-    this.switchTimeMax = 5000;
+    this.switchTimeMax = 7500;
 
     this.game.heroA.setActive(true);
     this.game.activeHero = this.game.heroA;
@@ -76,11 +75,7 @@ class PlayState extends BaseState {
     if(!this.isActive) {
       return;
     }
-    // this.switchTick++;
-    // if(this.switchTick >= this.switchTickMax) {
-    //   this.switchHero();
-    //   this.switchTick = 0;
-    // }
+
     this.nowTime = Date.now();
     this.deltaTime = this.nowTime - this.oldTime;
     this.elapsedTime = this.nowTime - this.startTime;

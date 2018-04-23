@@ -1,9 +1,12 @@
 # TASKS
 
+- ring around hero
+- send time to win state (check if high score or not)
 - level state storage
   - beaten?
   - available?
   - best time?
+- dialogue blocks
 - UI for overall time, time left in turn, life left
 - menu/level select
 - level complete
@@ -36,6 +39,7 @@
   - antialias?
   - no spatial hash on cube collisions?
 - fix flickery scaling issues on meters
+- use delta time for movement
 
 # SOUNDS
 
