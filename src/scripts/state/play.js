@@ -14,6 +14,8 @@ class PlayState extends BaseState {
   reset() {
     this.game.levelManager.set(this.game.currentLevel);
 
+    this.flashOpacity = 0;
+
     this.switchTime = 0;
     this.switchTimeMax = 6000;
 
@@ -39,7 +41,17 @@ class PlayState extends BaseState {
     this.dom.heroAMeterTimeBar = document.querySelector('.state-play-hero-a-meter-time-bar');
     this.dom.heroBMeterTimeBar = document.querySelector('.state-play-hero-b-meter-time-bar');
     this.dom.dialog = document.querySelector('.state-play-dialog');
+    //this.dom.flash = document.querySelector('.state-play-flash');
   }
+
+  observe() {
+    super.observe();
+    //this.env.eventful.on('collect-firefly', (e) => this.smallFlash(e));
+  }
+
+  // smallFlash() {
+  //   this.flashOpacity = 0.04;
+  // }
 
   switchHero() {
     if(!this.isActive) {
@@ -94,7 +106,7 @@ class PlayState extends BaseState {
 
     setTimeout(() => {
       this.hideMaryDialog();
-    }, 3000);
+    }, 2500);
 
   }
 
@@ -144,7 +156,7 @@ class PlayState extends BaseState {
 
     setTimeout(() => {
       this.hideZoeyDialog();
-    }, 3000);
+    }, 2500);
   }
 
   hideZoeyDialog() {
@@ -203,6 +215,14 @@ class PlayState extends BaseState {
       this.dom.heroAMeterTimeBar.style.transform = 'scaleX(1)';
       this.dom.heroBMeterTimeBar.style.transform = `scaleX(${1 - this.switchTime / this.switchTimeMax})`;
     }
+
+    // if(this.flashOpacity > 0) {
+    //   this.flashOpacity -= 0.0025;
+    //   if(this.flashOpacity < 0) {
+    //     this.flashOpacity = 0;
+    //   }
+    // }
+    // this.dom.flash.style.opacity = this.flashOpacity;
   }
 
 }

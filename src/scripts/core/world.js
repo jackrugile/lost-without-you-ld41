@@ -8,6 +8,7 @@ require('three/examples/js/postprocessing/RenderPass');
 require('three/examples/js/postprocessing/MaskPass');
 require('three/examples/js/shaders/CopyShader');
 require('three/examples/js/shaders/FilmShader.js');
+require('three/examples/js/shaders/BrightnessContrastShader.js');
 require('three/examples/js/shaders/ConvolutionShader');
 require('three/examples/js/shaders/LuminosityHighPassShader');
 require('three/examples/js/shaders/RGBShiftShader');
@@ -32,6 +33,11 @@ class World {
   observe() {
     this.env.eventful.on('game-resize', (e) => this.onGameResize(e));
     this.env.eventful.on('game-animate', () => this.onGameAnimate());
+    this.env.eventful.on('collect-firefly', () => this.smallFlash());
+  }
+
+  smallFlash() {
+    this.brightnessValue = 0.03;
   }
 
   setupScene() {
@@ -76,6 +82,13 @@ class World {
     //this.renderPass.clear = false;
     //this.renderPass.clearDepth = true;
     this.composer.addPass(this.renderPass);
+
+    this.brightnessPass = new THREE.ShaderPass(THREE.BrightnessContrastShader);
+    this.brightnessValue = 0;
+    this.brightnessPass.uniforms['brightness'].value = 0;
+    this.brightnessPass.uniforms['contrast'].value = 0;
+    this.brightnessPass.renderToScreen = false;
+    this.composer.addPass(this.brightnessPass);
 
     this.rgbPass = new THREE.ShaderPass(THREE.RGBShiftShader);
     this.rgbPass.uniforms['amount'].value = 0;
@@ -126,6 +139,14 @@ class World {
     //this.bloomPass.strength = 0.5 + Math.sin(Date.now() * 0.003) * 0.5;
     //this.bloomPass.radius = 1 + Math.sin(Date.now() * 0.003) * 1;
     //this.bloomPass.radius = 0.5 - Math.sin(Date.now() * 0.003) * 0.25;
+
+    if(this.brightnessValue > 0) {
+      this.brightnessValue -= 0.001;
+      if(this.brightnessValue < 0) {
+        this.brightnessValue = 0;
+      }
+    }
+    this.brightnessPass.uniforms['brightness'].value = this.brightnessValue;
   }
 
   render() {

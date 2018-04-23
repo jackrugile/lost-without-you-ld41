@@ -1,8 +1,6 @@
 # TASKS
 
 - music
-- icon
-- flash or puff when collecting firefly
 - write game description
   - meta tags
 - juice
@@ -15,7 +13,6 @@
 # BUGS / PERFORMANCE
 
 - can I use spatial hash for better collision perf?
-- use delta time for movement
 - possible add second line to bottom of hero to show time left
 - click for first sound play to bypass sound browser lock
 
@@ -54,3 +51,4 @@
 - millisecond precision of high scores for hardcore speedrunners
 - fade in intro screen
 - pause on blur, resume on focus
+- light streaks as camera moves

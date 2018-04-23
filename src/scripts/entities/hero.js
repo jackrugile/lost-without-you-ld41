@@ -1,11 +1,13 @@
 const env = require('../env.js');
 const Calc = require('../utils/calc');
+const Ease = require('../utils/ease');
 
 class Hero {
 
   constructor(game, name, origin) {
     this.env = env;
     this.calc = new Calc();
+    this.ease = new Ease();
     this.game = game;
     this.name = name;
     this.origin = origin;
@@ -36,6 +38,7 @@ class Hero {
     this.setupMesh();
     this.setupLights();
     this.setupCollisions();
+    this.spawnGhost();
   }
 
   observe() {
@@ -93,8 +96,8 @@ class Hero {
 
     this.light2 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 75%, 50%)`), this.light2Intensity, this.lightDistanceBase, 2);
     this.light2.castShadow = true;
-    this.light2.shadow.mapSize.width = 128;
-    this.light2.shadow.mapSize.height = 128;
+    this.light2.shadow.mapSize.width = window.devicePixelRatio > 1 ? 128 : 512;
+    this.light2.shadow.mapSize.height = window.devicePixelRatio > 1 ? 128 : 512;
     this.mesh.add(this.light2);
   }
 
@@ -228,6 +231,29 @@ class Hero {
     this.life += 0.2;
     this.life = this.calc.clamp(this.life, 0, 1);
     this.game.sounds.fireflyCollect.play();
+    this.ghostOpacity = 1;
+    this.ghostScale = 2;
+    if(this.isActive) {
+      this.env.eventful.trigger('collect-firefly');
+    }
+  }
+
+  spawnGhost() {
+    this.ghostGeometry = new THREE.BoxBufferGeometry(this.width, this.height, this.depth);
+    //this.ghostGeometry = new THREE.SphereBufferGeometry(this.width, 32, 32);
+    this.ghostMaterial = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending
+    });
+    this.ghostMesh = new THREE.Mesh(this.ghostGeometry, this.ghostMaterial);
+    this.ghostMesh.position.copy(this.mesh.position);
+    //let scale = 1.5;
+    //this.ghostMesh.scale.set(scale, scale, scale);
+    this.ghostOpacity = 0;
+    this.ghostScale = 2;
+    this.game.world.scene.add(this.ghostMesh);
   }
 
   updateLightLife() {
@@ -292,6 +318,20 @@ class Hero {
     this.collideHeros();
     this.collideFireflies();
     this.updateLightLife();
+
+    this.ghostMesh.position.copy(this.mesh.position);
+
+    if(this.ghostOpacity > 0) {
+      this.ghostOpacity -= 0.015;
+    }
+    let eased = this.ease.inExpo(this.ghostOpacity, 0, 1, 1);
+    this.ghostMaterial.opacity = eased;
+
+    // if(this.ghostScale > 1) {
+    //   this.ghostScale -= 0.02;
+    // }
+    let newScale = 1 + eased * 0.5;
+    this.ghostMesh.scale.set(newScale, newScale, newScale);
   }
 
 }

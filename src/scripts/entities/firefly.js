@@ -71,8 +71,8 @@ class Firefly {
       }
     }
 
-    this.mesh.position.x += Math.cos(this.angle) * this.velocity;
-    this.mesh.position.z += Math.sin(this.angle) * this.velocity;
+    this.mesh.position.x += Math.cos(this.angle) * this.velocity * this.game.time.dtn;
+    this.mesh.position.z += Math.sin(this.angle) * this.velocity * this.game.time.dtn;
 
     this.mesh.bbox.setFromObject(this.mesh);
   }
