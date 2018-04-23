@@ -143,8 +143,6 @@ class Game {
       shininess: 20
     });
 
-    console.log(this.env);
-
     this.levelManager = new LevelManager(this);
   }
 

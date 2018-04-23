@@ -111,7 +111,7 @@ class Hero {
     this.colliding.left = false;
     this.colliding.right = false;
 
-    if(this.isActive) {
+    if(this.isActive && this.game.isPlaying) {
       if(this.game.dir.left && !this.colliding.left) {
         this.acceleration.x = -this.accelerationGain;
       } else if(this.game.dir.right && !this.colliding.right) {
@@ -143,7 +143,7 @@ class Hero {
       }
     }
 
-    if(this.isActive) {
+    if(this.isActive && this.game.isPlaying) {
       if(this.game.dir.up && !this.colliding.up) {
         this.acceleration.z = -this.accelerationGain;
       } else if(this.game.dir.down && !this.colliding.down) {
@@ -227,7 +227,7 @@ class Hero {
   }
 
   updateLightLife() {
-    if(this.isActive) {
+    if(this.isActive && this.game.isPlaying) {
       if(this.life > 0) {
         this.life -= this.decay;
         this.lightDistanceTarget = 0 + this.lightDistanceBase * this.life;

@@ -77,13 +77,13 @@ h2
   text-align: center
   *:nth-child(1)
     color: hsl($hero-a-hue, $hero-sat, $hero-lit)
-    font-weight: 400
+    font-weight: 600
   *:nth-child(2)
     font-weight: 200
     position: relative
   *:nth-child(3)
     color: hsl($hero-b-hue, $hero-sat, $hero-lit)
-    font-weight: 400
+    font-weight: 600
 
 .state-menu-subtitle
   border-bottom: 2px solid #333
@@ -322,6 +322,29 @@ h2
     background: hsl($hero-a-hue, $hero-sat, $hero-lit)
   &.state-play-hero-b-meter-time-bar
     background: hsl($hero-b-hue, $hero-sat, $hero-lit)
+
+.state-play-dialog
+  bottom: 420px
+  color: #fff
+  font-size: 40px
+  font-weight: 200
+  left: 0
+  opacity: 0
+  margin: 0 auto
+  max-width: 1200px
+  position: absolute
+  right: 0
+  text-align: center
+  transition: 500ms opacity
+  width: 100%
+  &.state-play-dialog-active
+    opacity: 1
+  span
+    font-weight: 600
+  &.state-play-dialog-a span
+    color: hsl($hero-a-hue, $hero-sat, $hero-lit)
+  &.state-play-dialog-b span
+    color: hsl($hero-b-hue, $hero-sat, $hero-lit)
 
 //-------------------------------------------------
 // STATE WIN

@@ -56,7 +56,7 @@ class Firefly {
       refDist = distToHeroB;
     }
 
-    if(refDist < distHeroThreshold) {
+    if(refDist < distHeroThreshold && this.game.isPlaying) {
       let dz = this.mesh.position.z - refHero.mesh.position.z;
       let dx = this.mesh.position.x - refHero.mesh.position.x;
       this.angle = Math.atan2(dz, dx) + Math.PI;

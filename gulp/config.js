@@ -32,10 +32,10 @@ module.exports = {
 
   // Meta for frontend static templates
   "meta": {
-    "google_analytics": "",
+    "google_analytics": "UA-5693606-7",
     "site_title": "Lost Without You",
     "site_description": "Lost Without You | Ludum Dare 41",
-    "site_keywords": "",
+    "site_keywords": "ludum dare, game, lost without you, indie game, game jam",
     "robots": () => {
       if( process.env.NODE_ENV == "production" ) {
         return "<meta name='robots' content='index, follow'>";

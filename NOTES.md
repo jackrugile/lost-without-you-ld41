@@ -1,13 +1,12 @@
 # TASKS
 
-- dialogue blocks
-  - start of level
 - sound
+  - unique audio per friend dialog
 - music
 - icons, favicon
 - meta tags
-- google analytics code
 - flash or puff when collecting firefly
+- write game description
 - juice
   - particle systems
   - camera shake
@@ -58,21 +57,4 @@
 - campfires
 - respawning fireflies
 - maybe both people have to die, if the first person dies, they become immobile and have no controls
-
-# DIALOGUE
-
-Beginning of level1:
-What is this place?
-It’s so dark…
-
-Beginning of level2:
-Where are you, Zoey?
-I’m scared!
-
-Beginning of level3:
-Why are we always getting lost?
-We’ve gotta stop losing each other, Mary…
-
-Beginning of level4:
-Again?!
-Is this real life?
+- millisecond precision of high scores for hardcore speedrunners
