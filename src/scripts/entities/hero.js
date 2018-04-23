@@ -27,6 +27,8 @@ class Hero {
     this.lightPositionCurrent = new THREE.Vector3();
     this.lightPositionTarget = new THREE.Vector3();
     this.lightDistanceBase = 5;
+    this.lightDistanceCurrent = 5;
+    this.lightDistanceTarget = 5;
     this.light1Intensity = 0.75;
     this.light2Intensity = 0.25;
 
@@ -58,29 +60,13 @@ class Hero {
     this.mesh.bbox = new THREE.Box3();
     this.game.world.scene.add(this.mesh);
 
-    // //innerRadius, outerRadius thetaSegments, phiSegments, thetaStart, thetaLength
-    // this.lifeGeometry = new THREE.RingBufferGeometry(this.lightDistanceBase * 0.45, this.lightDistanceBase * 0.46, 60, 1, 0);
-    // this.lifeGeometry.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-    // this.lifeMaterial = new THREE.MeshBasicMaterial({
-    //   blending: THREE.AdditiveBlending,
-    //   color: new THREE.Color(`hsl(${this.hue}, 80%, 50%)`),
-    //   transparent: true,
-    //   opacity: 0.05,
-    //   depthTest: false
-    // });
-    // this.lifeMeshScaleCurrent = 1;
-    // this.lifeMeshScaleTarget = 1;
-    // this.lifeMesh = new THREE.Mesh(this.lifeGeometry, this.lifeMaterial);
-    // this.game.world.scene.add(this.lifeMesh);
-
     this.lifeGeometryBack = new THREE.PlaneBufferGeometry(0.3, 0.01);
     this.lifeGeometryBack.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
     this.lifeMaterialBack = new THREE.MeshBasicMaterial({
-      //blending: THREE.AdditiveBlending,
       color: new THREE.Color('hsl(0, 0%, 0%)'),
       transparent: true,
       opacity: 0.25,
-      //depthTest: false
+      depthTest: false
     });
     this.lifeMeshBack = new THREE.Mesh(this.lifeGeometryBack, this.lifeMaterialBack);
     this.game.world.scene.add(this.lifeMeshBack);
@@ -243,13 +229,24 @@ class Hero {
     if(this.isActive) {
       if(this.life > 0) {
         this.life -= this.decay;
-        this.light1.distance = 2 + this.lightDistanceBase * this.life;
-        this.light2.distance = 2 + this.lightDistanceBase * this.life;
+        this.lightDistanceTarget = 2 + this.lightDistanceBase * this.life;
+        this.lightDistanceCurrent += (this.lightDistanceTarget - this.lightDistanceCurrent) * 0.2;
+        this.light1.distance = this.lightDistanceCurrent;
+        this.light2.distance = this.lightDistanceCurrent;
       } else {
         this.light1.distance = 2;
         this.light2.distance = 2;
         this.game.stateManager.set('lose');
       }
+
+      this.lifeMeshBack.position.copy(this.mesh.position);
+      this.lifeMeshBack.position.z -= 0.23;
+      this.lifeMesh.position.copy(this.mesh.position);
+      this.lifeMesh.position.z -= 0.23;
+      this.lifeMeshScaleTarget = 0.000001 + this.life;
+      this.lifeMeshScaleCurrent += (this.lifeMeshScaleTarget - this.lifeMeshScaleCurrent) * 0.2;
+      this.lifeMesh.position.x -= (0.3 - 0.3 * this.lifeMeshScaleCurrent) / 2;
+      this.lifeMesh.scale.set(this.lifeMeshScaleCurrent, 1, 1);
     }
 
     //let intensity = 0.88 + Math.sin(Date.now() * 0.004) * 0.12;
@@ -268,6 +265,16 @@ class Hero {
     this.geometry.dispose();
     this.material.dispose();
     this.mesh = null;
+
+    this.game.world.scene.remove(this.lifeMesh);
+    this.lifeGeometry.dispose();
+    this.lifeMaterial.dispose();
+    this.lifeMesh = null;
+
+    this.game.world.scene.remove(this.lifeMeshBack);
+    this.lifeGeometryBack.dispose();
+    this.lifeMaterialBack.dispose();
+    this.lifeMeshBack = null;
   }
 
   update() {
@@ -280,23 +287,6 @@ class Hero {
     this.collideHeros();
     this.collideFireflies();
     this.updateLightLife();
-
-    // this.lifeMesh.position.copy(this.mesh.position);
-    // this.lifeMeshScaleTarget = 0.000001 + this.life;
-    // this.lifeMeshScaleCurrent += (this.lifeMeshScaleTarget- this.lifeMeshScaleCurrent) * 0.1;
-    // this.lifeMesh.scale.set(this.lifeMeshScaleCurrent, this.lifeMeshScaleCurrent, this.lifeMeshScaleCurrent);
-    // this.lifeMaterial.opacity = 0.025 + Math.sin(Date.now() * 0.004) * 0.015;
-
-    this.lifeMeshBack.position.copy(this.mesh.position);
-    this.lifeMeshBack.position.z -= 0.23;
-    this.lifeMesh.position.copy(this.mesh.position);
-    this.lifeMesh.position.z -= 0.23;
-    this.lifeMeshScaleTarget = 0.000001 + this.life;
-    // this.lifeMeshScaleCurrent += (this.lifeMeshScaleTarget - this.lifeMeshScaleCurrent) * 0.1;
-    this.lifeMeshScaleCurrent = this.lifeMeshScaleTarget;
-    this.lifeMesh.position.x -= (0.3 - 0.3 * this.lifeMeshScaleCurrent) / 2;
-    this.lifeMesh.scale.set(this.lifeMeshScaleCurrent, 1, 1);
-    //this.lifeMaterial.opacity = 0.7 + Math.sin(Date.now() * 0.004) * 0.3;
   }
 
 }
