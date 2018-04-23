@@ -24,8 +24,8 @@
   - antialias?
   - no spatial hash on cube collisions?
 - use delta time for movement
-- possible add ring back as LIFE meter and dash mark as TIME meter?
-- click for first sound play
+- possible add second line to bottom of hero to show time left
+- click for first sound play to bypass sound browser lock
 
 # SOUNDS
 
@@ -40,6 +40,7 @@
 - dialogue blip
 - level intro
 - button sound
+- different death sound for mary and zoey
 
 # GENRE
 
@@ -47,6 +48,7 @@
 
 # NICE TO HAVES
 
+- jump/flash hero when they talk
 - catch a high energy firefly orb to create a permanent light source
 - asset loader
 - mute

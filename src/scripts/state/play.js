@@ -21,6 +21,9 @@ class PlayState extends BaseState {
 
     this.game.isPlaying = false;
 
+    this.game.sounds.levelIntro.rate(0.5);
+    this.game.sounds.levelIntro.play();
+
     this.showMaryDialog();
   }
 
@@ -58,6 +61,10 @@ class PlayState extends BaseState {
   }
 
   showMaryDialog() {
+    setTimeout(() => {
+      this.game.sounds.mary.play();
+    }, 1500);
+
     this.game.heroA.setActive(true);
     this.game.activeHero = this.game.heroA;
     this.dom.heroAWrap.classList.add('state-play-hero-wrap-active');
@@ -100,6 +107,15 @@ class PlayState extends BaseState {
   }
 
   showZoeyDialog() {
+    setTimeout(() => {
+      this.game.sounds.zoey.play();
+    }, 1200);
+
+    setTimeout(() => {
+      this.game.sounds.levelIntro.rate(0.7);
+      this.game.sounds.levelIntro.play();
+    }, 750);
+
     this.game.heroA.setActive(false);
     this.game.heroB.setActive(true);
     this.game.activeHero = this.game.heroB;

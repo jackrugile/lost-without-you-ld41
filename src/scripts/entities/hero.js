@@ -200,6 +200,7 @@ class Hero {
     if(this.game.heroA && this.game.heroB) {
       let otherHero = this.name === 'a' ? this.game.heroB : this.game.heroA;
       if(this.mesh.bbox.intersectsBox(otherHero.mesh.bbox)) {
+        this.game.sounds.unite.play();
         this.game.lastLevelPlayed = this.game.currentLevel;
         this.game.lastLevelTime = this.game.currentState.elapsedTime;
         this.game.stateManager.set('win');
@@ -235,6 +236,7 @@ class Hero {
         this.light1.distance = this.lightDistanceCurrent;
         this.light2.distance = this.lightDistanceCurrent;
       } else {
+        this.game.sounds.death.play();
         this.light1.distance = 0;
         this.light2.distance = 0;
         this.game.lastLevelPlayed = this.game.currentLevel;

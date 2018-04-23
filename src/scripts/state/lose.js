@@ -18,6 +18,7 @@ class LoseState extends BaseState {
   }
 
   onClick() {
+    this.game.sounds.button.play();
     this.game.stateManager.set('menu');
   }
 

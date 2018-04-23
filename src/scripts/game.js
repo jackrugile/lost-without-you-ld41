@@ -161,6 +161,31 @@ class Game {
       fireflyCollect: new Howl({
         src: ['./sounds/firefly-collect-1.wav'],
         volume: 1
+      }),
+      button: new Howl({
+        src: ['./sounds/button4.wav'],
+        volume: 0.3,
+        rate: 4
+      }),
+      levelIntro: new Howl({
+        src: ['./sounds/level_intro.wav'],
+        volume: 1
+      }),
+      death: new Howl({
+        src: ['./sounds/death.wav'],
+        volume: 0.15
+      }),
+      unite: new Howl({
+        src: ['./sounds/unite-1.wav'],
+        volume: 1
+      }),
+      zoey: new Howl({
+        src: ['./sounds/zoey.wav'],
+        volume: 1
+      }),
+      mary: new Howl({
+        src: ['./sounds/mary.wav'],
+        volume: 0.3
       })
     };
   }
