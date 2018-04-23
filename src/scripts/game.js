@@ -97,7 +97,6 @@ class Game {
     });
 
     this.levelManager = new LevelManager(this);
-    //this.currentLevel = 'alpha';
   }
 
   setupInputs() {

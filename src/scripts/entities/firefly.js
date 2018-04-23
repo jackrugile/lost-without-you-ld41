@@ -24,7 +24,6 @@ class Firefly {
     this.observe();
     this.setupMesh();
     this.setupGlow();
-    this.setupLights();
   }
 
   observe() {
@@ -44,13 +43,6 @@ class Firefly {
     this.glowMesh.scale.set(this.glowScale, this.glowScale, this.glowScale);
     this.glowMesh.position.set(0, 0, 0);
     this.mesh.add(this.glowMesh);
-  }
-
-  setupLights() {
-    // this.light = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 100%, 50%)`), 0.6, 1, 2);
-    // this.light.castShadow = false;
-    // this.light.position.set(0, 0.5, 0);
-    // this.mesh.add(this.light);
   }
 
   move() {
@@ -88,9 +80,6 @@ class Firefly {
   pulse() {
     let scale = this.calc.map(Math.sin(Date.now() * this.pulseRate + this.pulseOffset), -1, 1, 0.1, 0.4);
     this.glowMesh.scale.set(scale, scale, scale);
-
-    // let distance = this.calc.map(Math.sin(Date.now() * this.pulseRate + this.pulseOffset), -1, 1, 0.75, 1);
-    // this.light.distance = distance;
   }
 
   destroy() {

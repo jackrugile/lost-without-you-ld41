@@ -19,6 +19,11 @@ class WinState extends BaseState {
     this.game.stateManager.set('menu');
   }
 
+  activate() {
+    super.activate();
+    console.log(this.game.lastLevelPlayed, this.game.lastLevelTime);
+  }
+
   update() {
     super.update();
   }

@@ -1,19 +1,18 @@
 # TASKS
 
-- ring around hero
 - send time to win state (check if high score or not)
-- level state storage
-  - beaten?
-  - available?
-  - best time?
 - dialogue blocks
-- UI for overall time, time left in turn, life left
 - menu/level select
+  - level state storage
+    - beaten?
+    - available?
+    - best time?
 - level complete
 - level failed
 - sound
 - music
 - asset loader
+- click for first sound play
 - juice
   - particle systems
   - camera shake
