@@ -24,6 +24,7 @@ class Game {
     this.resolution = {};
 
     this.setupDOM();
+    this.setupStorage();
     this.setupTime();
     this.setupWorld();
     this.setupStates();
@@ -40,6 +41,52 @@ class Game {
     this.dom = {};
     this.dom.container = document.querySelector('.container');
     this.dom.scaler = document.querySelector('.scaler');
+  }
+
+  setupStorage() {
+    if(!this.env.storage.get('level1')) {
+      this.env.storage.set('level1', {
+        name: 'level1',
+        index: 0,
+        available: true,
+        beaten: false,
+        bestTime: null,
+        timesPlayed: 0
+      });
+    }
+
+    if(!this.env.storage.get('level2')) {
+      this.env.storage.set('level2', {
+        name: 'level2',
+        index: 1,
+        available: false,
+        beaten: false,
+        bestTime: null,
+        timesPlayed: 0
+      });
+    }
+
+    if(!this.env.storage.get('level3')) {
+      this.env.storage.set('level3', {
+        name: 'level3',
+        index: 2,
+        available: false,
+        beaten: false,
+        bestTime: null,
+        timesPlayed: 0
+      });
+    }
+
+    if(!this.env.storage.get('level4')) {
+      this.env.storage.set('level4', {
+        name: 'level4',
+        index: 3,
+        available: false,
+        beaten: false,
+        bestTime: null,
+        timesPlayed: 0
+      });
+    }
   }
 
   setupTime() {
@@ -95,6 +142,8 @@ class Game {
       specular: 0x666666,
       shininess: 20
     });
+
+    console.log(this.env);
 
     this.levelManager = new LevelManager(this);
   }

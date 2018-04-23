@@ -109,36 +109,46 @@ h2
   display: flex
 
 .state-menu-level
+  margin-right: 40px;
+  &:last-child
+    margin-right: 0
+
+.state-menu-level-title
   align-items: center
   border: 2px solid #555
   color: #555
   cursor: not-allowed
   display: flex
-  font-size: 24px
+  font-size: 35px
   font-weight: 500
   height: 80px
   line-height: 1
-  margin-right: 40px;
   justify-content: center
   text-align: center
   transition: all 200ms
   width: 80px
-  &.state-menu-level-available
+  .state-menu-level-available &
     border-color: #fff
     color: #fff
     cursor: pointer
-  &.state-menu-level-beaten
+  .state-menu-level-beaten &
     background: #fff
     border-color: #fff
     color: #000
     cursor: pointer
-  &:last-child
-    margin-right: 0
-  &.state-menu-level-available:hover,
-  &.state-menu-level-beaten:hover
+  .state-menu-level-available:hover &,
+  .state-menu-level-beaten:hover &
     border-color: #fff
     box-shadow: 0 0 0 8px hsla(0, 0%, 100%, 0.1)
     transform: scale(1.1)
+
+.state-menu-level-time
+  color: #fff
+  font-family: 'Roboto Mono', monospace
+  font-size: 16px
+  font-weight: 500
+  margin-top: 20px
+  text-align: center
 
 //-------------------------------------------------
 // STATE INSTRUCTIONS

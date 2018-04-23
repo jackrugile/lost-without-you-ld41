@@ -1,12 +1,12 @@
 const BaseLevel = require('./base');
-const Level4 = require('../data/level4.txt');
+const Level2Data = require('../data/level2.txt');
 
-class DeltaLevel extends BaseLevel {
+class Level2 extends BaseLevel {
 
   constructor(game, name) {
     super(game, name);
 
-    this.maze = Level4;
+    this.maze = Level2Data;
   }
 
   update() {
@@ -15,4 +15,4 @@ class DeltaLevel extends BaseLevel {
 
 }
 
-module.exports = DeltaLevel;
+module.exports = Level2;

@@ -50,6 +50,9 @@
 - low life warning ping
 - death
 - music loop
+- dialogue blip
+- level intro
+- button sound
 
 # GENRE
 

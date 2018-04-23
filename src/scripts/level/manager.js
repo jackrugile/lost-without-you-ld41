@@ -1,8 +1,8 @@
 const env = require('../env.js');
-const AlphaLevel = require('./alpha.js');
-const BetaLevel = require('./beta.js');
-const GammaLevel = require('./gamma.js');
-const DeltaLevel = require('./delta.js');
+const Level1 = require('./level1.js');
+const Level2 = require('./level2.js');
+const Level3 = require('./level3.js');
+const Level4 = require('./level4.js');
 
 class LevelManager {
 
@@ -11,17 +11,17 @@ class LevelManager {
     this.game = game;
 
     this.levelNames = [
-      'alpha',
-      'beta',
-      'gamma',
-      'delta'
+      'level1',
+      'level2',
+      'level3',
+      'level4'
     ];
 
     this.levels = {
-      alpha: new AlphaLevel(this.game, 'alpha'),
-      beta: new BetaLevel(this.game, 'beta'),
-      gamma: new GammaLevel(this.game, 'gamma'),
-      delta: new DeltaLevel(this.game, 'delta')
+      level1: new Level1(this.game, 'level1'),
+      level2: new Level2(this.game, 'level2'),
+      level3: new Level3(this.game, 'level3'),
+      level4: new Level4(this.game, 'level4')
     };
   }
 
