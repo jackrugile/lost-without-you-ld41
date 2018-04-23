@@ -24,7 +24,6 @@ class WinState extends BaseState {
     super.activate();
     this.tick = 0;
     this.tickMax = 60 * 5;
-    console.log(this.game.lastLevelPlayed, this.game.lastLevelTime);
     this.dom.info.innerHTML = `Level ${this.game.levelManager.levelNames.indexOf(this.game.lastLevelPlayed) + 1} Complete<br><span>${this.utils.msToString(this.game.lastLevelTime)}</span>`;
 
     // increase times played
@@ -49,12 +48,9 @@ class WinState extends BaseState {
     // set next level to available
     levelStorage = this.env.storage.get(this.game.lastLevelPlayed);
     let currIndex = levelStorage.index;
-    console.log('c', currIndex);
     if(currIndex < 3) {
       let nextIndex = currIndex + 2;
-      console.log('n', nextIndex);
       let nextLevelStorage = this.env.storage.get(`level${nextIndex}`);
-      console.log(nextLevelStorage);
       nextLevelStorage.available = true;
       this.env.storage.set(`level${nextIndex}`, nextLevelStorage);
     }
@@ -62,6 +58,9 @@ class WinState extends BaseState {
 
   update() {
     super.update();
+    if(!this.isActive) {
+      return;
+    }
     this.tick++;
     if(this.tick === this.tickMax) {
       this.game.stateManager.set('menu');

@@ -22,7 +22,6 @@ class BaseLevel {
     this.setupWalls();
     this.setupHeros();
     this.setupFireflies();
-    console.log(`${this.name} level built`);
   }
 
   parseMaze() {
@@ -90,7 +89,6 @@ class BaseLevel {
           let z = i - this.mazeRows / 2;
           let origin = new THREE.Vector3(x + 0.5, y, z + 0.5);
           if(item === 1) {
-            console.log(1);
             this.game.heroA = new Hero(this.game, 'a', origin);
           }
           if(item === 2) {

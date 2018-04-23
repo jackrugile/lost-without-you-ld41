@@ -81,15 +81,15 @@ class PlayState extends BaseState {
       this.switchTime = this.switchTime - this.switchTimeMax;
     }
 
-    this.dom.heroAMeterLightBar.style.transform = `translate3d(${(1 - this.game.heroA.life) * -100}%, 0, 0)`;
-    this.dom.heroBMeterLightBar.style.transform = `translate3d(${(1 - this.game.heroB.life) * -100}%, 0, 0)`;
+    this.dom.heroAMeterLightBar.style.transform = `scaleX(${this.game.heroA.life})`;
+    this.dom.heroBMeterLightBar.style.transform = `scaleX(${this.game.heroB.life})`;
 
     if(this.game.heroA.isActive) {
-      this.dom.heroAMeterTimeBar.style.transform = `translate3d(${(this.switchTime / this.switchTimeMax) * -100}%, 0, 0)`;
-      this.dom.heroBMeterTimeBar.style.transform = 'translate3d(0%, 0, 0)';
+      this.dom.heroAMeterTimeBar.style.transform = `scaleX(${1 - this.switchTime / this.switchTimeMax})`;
+      this.dom.heroBMeterTimeBar.style.transform = 'scaleX(1)';
     } else {
-      this.dom.heroAMeterTimeBar.style.transform = 'translate3d(0%, 0, 0)';
-      this.dom.heroBMeterTimeBar.style.transform = `translate3d(${(this.switchTime / this.switchTimeMax) * -100}%, 0, 0)`;
+      this.dom.heroAMeterTimeBar.style.transform = 'scaleX(1)';
+      this.dom.heroBMeterTimeBar.style.transform = `scaleX(${1 - this.switchTime / this.switchTimeMax})`;
     }
   }
 

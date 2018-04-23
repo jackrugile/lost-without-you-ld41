@@ -1,17 +1,17 @@
 # TASKS
 
-- send time to win state (check if high score or not)
-- dialogue blocks
-- menu/level select
-  - level state storage
-    - beaten?
-    - available?
-    - best time?
 - level complete
+  - add varying narration lines
 - level failed
+  - add varying narration lines
+- dialogue blocks
+  - start of level
 - sound
 - music
-- click for first sound play
+- icons, favicon
+- meta tags
+- google analytics code
+- flash or puff when collecting firefly
 - juice
   - particle systems
   - camera shake
@@ -19,16 +19,8 @@
   - add mesh line explosion on unite
   - explode in to sky as maze drifts away
   - make maze explode
-  - use characters as the os in the logo
-- "Why do we keep getting lost"
-- Lvl 4, both start in center of level
-- icons, favicon
-- meta tags
-- google analytics code
-- flash or puff when collecting firefly
-- eventually remove unused pre text in HTML
 
-# GENERAL
+# BUGS / PERFORMANCE
 
 - can I use spatial hash for better collision perf?
 - find bottleneck on laptop
@@ -36,9 +28,9 @@
   - resolution?
   - antialias?
   - no spatial hash on cube collisions?
-- fix flickery scaling issues on meters
 - use delta time for movement
 - possible add ring back as LIFE meter and dash mark as TIME meter?
+- click for first sound play
 
 # SOUNDS
 
@@ -73,6 +65,7 @@
 
 - two friends are lost in the darkness
 ---
-- use arrow keys/WASD to move each friend for 5 seconds at a time
-- reunite the two friends before they run out of light
-- collect fireflies and torches to boost your light supply
+- reunite Mary and Zoey before they run out of light
+- use ||||/WASD to navigate
+- controls alternate between friends
+- collect fireflies to boost your light

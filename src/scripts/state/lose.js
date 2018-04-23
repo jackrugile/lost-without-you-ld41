@@ -24,7 +24,6 @@ class LoseState extends BaseState {
     super.activate();
     this.tick = 0;
     this.tickMax = 60 * 5;
-    console.log(this.game.lastLevelPlayed, this.game.lastLevelTime);
     this.dom.info.innerHTML = `Level ${this.game.levelManager.levelNames.indexOf(this.game.lastLevelPlayed) + 1} Failed<br><span>${this.utils.msToString(this.game.lastLevelTime)}</span>`;
 
     let levelStorage = this.env.storage.get(this.game.lastLevelPlayed);
@@ -34,7 +33,11 @@ class LoseState extends BaseState {
 
   update() {
     super.update();
+    if(!this.isActive) {
+      return;
+    }
     this.tick++;
+    console.log(this.tick);
     if(this.tick === this.tickMax) {
       this.game.stateManager.set('menu');
     }

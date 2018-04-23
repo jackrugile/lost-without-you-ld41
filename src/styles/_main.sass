@@ -115,8 +115,8 @@ h2
 
 .state-menu-level-title
   align-items: center
-  border: 2px solid #555
-  color: #555
+  border: 2px solid #444
+  color: #444
   cursor: not-allowed
   display: flex
   font-size: 35px
@@ -155,7 +155,55 @@ h2
 //-------------------------------------------------
 
 .state-instructions
-  background: hsla(60, 100%, 50%, 0.2)
+  background: radial-gradient(#181818, #000)
+  //text-align: center
+
+.state-instructions-title
+  border-bottom: 2px solid #333
+  color: #fff
+  font-size: 50px
+  font-weight: 500
+  line-height: 1
+  margin-bottom: 70px
+  padding-bottom: 70px
+  text-align: center
+
+.state-instructions-list
+  //
+
+.state-instructions-list-item
+  color: #fff
+  font-size: 35px
+  font-weight: 300
+  line-height: 1
+  margin-bottom: 20px
+  position: relative
+  span:nth-child(1)
+    color: hsl($hero-a-hue, $hero-sat, $hero-lit)
+    font-weight: 500
+  span:nth-child(2)
+    color: hsl($hero-b-hue, $hero-sat, $hero-lit)
+    font-weight: 500
+  &:after
+    background: #fff
+    content: ''
+    height: 8px
+    left: -30px
+    position: absolute
+    top: 50%
+    transform: translate3d(0, -50%, 0)
+    width: 8px
+
+.state-instructions-cont
+  bottom: 60px
+  color: #999
+  font-size: 20px
+  font-style: italic
+  font-weight: 400
+  left: 0
+  position: absolute
+  text-align: center
+  width: 100%
 
 //-------------------------------------------------
 // STATE PLAY
@@ -305,6 +353,17 @@ h2
     font-weight: 500
     letter-spacing: -0.05em
 
+.state-win-cont
+  bottom: 60px
+  color: #999
+  font-size: 20px
+  font-style: italic
+  font-weight: 400
+  left: 0
+  position: absolute
+  text-align: center
+  width: 100%
+
 //-------------------------------------------------
 // STATE LOSE
 //-------------------------------------------------
@@ -332,3 +391,14 @@ h2
     font-size: 26px
     font-weight: 500
     letter-spacing: -0.05em
+
+.state-lose-cont
+  bottom: 60px
+  color: #999
+  font-size: 20px
+  font-style: italic
+  font-weight: 400
+  left: 0
+  position: absolute
+  text-align: center
+  width: 100%

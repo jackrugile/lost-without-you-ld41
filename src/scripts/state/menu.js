@@ -29,7 +29,11 @@ class MenuState extends BaseState {
       levelElem.addEventListener('click', () => {
         if(this.env.storage.get(name).available) {
           this.game.currentLevel = name;
-          this.game.stateManager.set('play');
+          if(name === 'level1') {
+            this.game.stateManager.set('instructions');
+          } else {
+            this.game.stateManager.set('play');
+          }
         }
       });
     }
@@ -104,6 +108,9 @@ class MenuState extends BaseState {
 
   update() {
     super.update();
+    if(!this.isActive) {
+      return;
+    }
   }
 
 }
