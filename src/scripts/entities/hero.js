@@ -15,7 +15,7 @@ class Hero {
     this.hue = this.name === 'a' ? 130 : 210;
 
     this.life = 1;
-    this.decay = 0.0015;
+    this.decay = 0.00175;
     //this.decay = 0;
 
     this.acceleration = new THREE.Vector3();

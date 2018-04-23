@@ -53,6 +53,7 @@
     "gulp-util": "^3.0.8",
     "modernizr-webpack-plugin": "^1.0.6",
     "mustache-loader": "^1.2.0",
+    "raw-loader": "^0.5.1",
     "webpack": "^3.6.0",
     "webpack-glsl-loader": "^1.0.1",
     "webpack-stream": "^4.0.0"

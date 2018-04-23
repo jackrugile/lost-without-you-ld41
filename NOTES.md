@@ -11,7 +11,6 @@
 - level failed
 - sound
 - music
-
 - click for first sound play
 - juice
   - particle systems
@@ -23,16 +22,15 @@
   - use characters as the os in the logo
 - "Why do we keep getting lost"
 - Lvl 4, both start in center of level
-- icons
+- icons, favicon
+- meta tags
+- google analytics code
 - flash or puff when collecting firefly
 - eventually remove unused pre text in HTML
-- possible add ring back as LIFE meter and dash mark as TIME meter?
 
 # GENERAL
 
 - can I use spatial hash for better collision perf?
-- torches
-  - touch collisions
 - find bottleneck on laptop
   - post process?
   - resolution?
@@ -40,6 +38,7 @@
   - no spatial hash on cube collisions?
 - fix flickery scaling issues on meters
 - use delta time for movement
+- possible add ring back as LIFE meter and dash mark as TIME meter?
 
 # SOUNDS
 
@@ -64,6 +63,8 @@
 - pause
 - settings
 - storage reset
+- torches
+- campfires
 
 # INTRO / INSTRUCTIONS
 
