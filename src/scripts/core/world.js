@@ -34,10 +34,20 @@ class World {
     this.env.eventful.on('game-resize', (e) => this.onGameResize(e));
     this.env.eventful.on('game-animate', () => this.onGameAnimate());
     this.env.eventful.on('collect-firefly', () => this.smallFlash());
+    this.env.eventful.on('end-tick', (e) => this.endTick(e));
+    this.env.eventful.on('play-reset', () => this.playReset());
   }
 
   smallFlash() {
     this.brightnessValue = 0.03;
+  }
+
+  endTick(e) {
+    this.brightnessValue = e.prog * 0.75;
+  }
+
+  playReset() {
+    this.brightnessValue = 0;
   }
 
   setupScene() {
@@ -140,10 +150,12 @@ class World {
     //this.bloomPass.radius = 1 + Math.sin(Date.now() * 0.003) * 1;
     //this.bloomPass.radius = 0.5 - Math.sin(Date.now() * 0.003) * 0.25;
 
-    if(this.brightnessValue > 0) {
-      this.brightnessValue -= 0.001;
-      if(this.brightnessValue < 0) {
-        this.brightnessValue = 0;
+    if(!this.game.isEnding) {
+      if(this.brightnessValue > 0) {
+        this.brightnessValue -= 0.001;
+        if(this.brightnessValue < 0) {
+          this.brightnessValue = 0;
+        }
       }
     }
     this.brightnessPass.uniforms['brightness'].value = this.brightnessValue;

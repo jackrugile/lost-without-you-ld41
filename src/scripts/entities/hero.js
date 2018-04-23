@@ -116,7 +116,7 @@ class Hero {
     this.colliding.left = false;
     this.colliding.right = false;
 
-    if(this.isActive && this.game.isPlaying) {
+    if(this.isActive && this.game.isPlaying && !this.game.isEnding) {
       if(this.game.dir.left && !this.colliding.left) {
         this.acceleration.x = -this.accelerationGain;
       } else if(this.game.dir.right && !this.colliding.right) {
@@ -124,6 +124,8 @@ class Hero {
       } else {
         this.acceleration.x = 0;
       }
+    } else {
+      this.acceleration.x = 0;
     }
 
     this.velocity.x += this.acceleration.x * this.game.time.dtn;
@@ -149,7 +151,7 @@ class Hero {
       }
     }
 
-    if(this.isActive && this.game.isPlaying) {
+    if(this.isActive && this.game.isPlaying && !this.game.isEnding) {
       if(this.game.dir.up && !this.colliding.up) {
         this.acceleration.z = -this.accelerationGain;
       } else if(this.game.dir.down && !this.colliding.down) {
@@ -157,7 +159,10 @@ class Hero {
       } else {
         this.acceleration.z = 0;
       }
+    } else {
+      this.acceleration.x = 0;
     }
+
     this.velocity.z += this.acceleration.z * this.game.time.dtn;
     this.velocity.z *= this.velocityFriction;
     this.velocity.z = this.calc.clamp(this.velocity.z, -this.velocityMax, this.velocityMax);
@@ -206,10 +211,12 @@ class Hero {
     if(this.game.heroA && this.game.heroB) {
       let otherHero = this.name === 'a' ? this.game.heroB : this.game.heroA;
       if(this.mesh.bbox.intersectsBox(otherHero.mesh.bbox)) {
-        this.game.sounds.unite.play();
-        this.game.lastLevelPlayed = this.game.currentLevel;
-        this.game.lastLevelTime = this.game.currentState.elapsedTime;
-        this.game.stateManager.set('win');
+        if(!this.game.isEnding) {
+          this.game.sounds.unite.play();
+          this.game.lastLevelPlayed = this.game.currentLevel;
+          this.game.lastLevelTime = this.game.currentState.elapsedTime;
+          this.env.eventful.trigger('unite');
+        }
       }
     }
   }
@@ -257,7 +264,7 @@ class Hero {
   }
 
   updateLightLife() {
-    if(this.isActive && this.game.isPlaying) {
+    if(this.isActive && this.game.isPlaying && !this.game.isEnding) {
       if(this.life > 0) {
         this.life -= this.decay;
         this.lightDistanceTarget = 0 + this.lightDistanceBase * this.life;

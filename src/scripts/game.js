@@ -177,7 +177,7 @@ class Game {
       }),
       unite: new Howl({
         src: ['./sounds/unite-1.wav'],
-        volume: 1
+        volume: 0.5
       }),
       zoey: new Howl({
         src: ['./sounds/zoey.wav'],

@@ -22,11 +22,14 @@ class PlayState extends BaseState {
     this.dom.levelTitle.textContent = `Level ${(this.game.levelManager.levelNames.indexOf(this.game.currentLevel) + 1)}`;
 
     this.game.isPlaying = false;
+    this.game.isEnding = false;
 
     this.game.sounds.levelIntro.rate(0.5);
     this.game.sounds.levelIntro.play();
 
     this.showMaryDialog();
+
+    this.env.eventful.trigger('play-reset');
   }
 
   setupDOM() {
@@ -41,17 +44,12 @@ class PlayState extends BaseState {
     this.dom.heroAMeterTimeBar = document.querySelector('.state-play-hero-a-meter-time-bar');
     this.dom.heroBMeterTimeBar = document.querySelector('.state-play-hero-b-meter-time-bar');
     this.dom.dialog = document.querySelector('.state-play-dialog');
-    //this.dom.flash = document.querySelector('.state-play-flash');
   }
 
   observe() {
     super.observe();
-    //this.env.eventful.on('collect-firefly', (e) => this.smallFlash(e));
+    this.env.eventful.on('unite', (e) => this.startEnd(e));
   }
-
-  // smallFlash() {
-  //   this.flashOpacity = 0.04;
-  // }
 
   switchHero() {
     if(!this.isActive) {
@@ -123,10 +121,10 @@ class PlayState extends BaseState {
       this.game.sounds.zoey.play();
     }, 1200);
 
-    setTimeout(() => {
-      this.game.sounds.levelIntro.rate(0.7);
-      this.game.sounds.levelIntro.play();
-    }, 750);
+    // setTimeout(() => {
+    //   this.game.sounds.levelIntro.rate(0.7);
+    //   this.game.sounds.levelIntro.play();
+    // }, 750);
 
     this.game.heroA.setActive(false);
     this.game.heroB.setActive(true);
@@ -183,6 +181,12 @@ class PlayState extends BaseState {
     this.deltaTime = 0;
   }
 
+  startEnd() {
+    this.game.isEnding = true;
+    this.endTick = 0;
+    this.endTickMax = 60 * 1.5;
+  }
+
   update() {
     super.update();
     if(!this.isActive) {
@@ -216,13 +220,13 @@ class PlayState extends BaseState {
       this.dom.heroBMeterTimeBar.style.transform = `scaleX(${1 - this.switchTime / this.switchTimeMax})`;
     }
 
-    // if(this.flashOpacity > 0) {
-    //   this.flashOpacity -= 0.0025;
-    //   if(this.flashOpacity < 0) {
-    //     this.flashOpacity = 0;
-    //   }
-    // }
-    // this.dom.flash.style.opacity = this.flashOpacity;
+    if(this.game.isEnding) {
+      this.endTick++;
+      this.env.eventful.trigger('end-tick', { prog: this.endTick / this.endTickMax});
+      if(this.endTick >= this.endTickMax) {
+        this.game.stateManager.set('win');
+      }
+    }
   }
 
 }
