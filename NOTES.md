@@ -1,6 +1,5 @@
 # TASKS
 
-- laptop performance
 - music
 - icon
 - flash or puff when collecting firefly
@@ -12,16 +11,10 @@
   - light flashes
   - add mesh line explosion on unite
   - explode in to sky as maze drifts away
-- fade in intro screen
 
 # BUGS / PERFORMANCE
 
 - can I use spatial hash for better collision perf?
-- find bottleneck on laptop
-  - post process?
-  - resolution?
-  - antialias?
-  - no spatial hash on cube collisions?
 - use delta time for movement
 - possible add second line to bottom of hero to show time left
 - click for first sound play to bypass sound browser lock
@@ -59,3 +52,5 @@
 - respawning fireflies
 - maybe both people have to die, if the first person dies, they become immobile and have no controls
 - millisecond precision of high scores for hardcore speedrunners
+- fade in intro screen
+- pause on blur, resume on focus

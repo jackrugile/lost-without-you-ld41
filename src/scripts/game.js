@@ -224,6 +224,11 @@ class Game {
     this.aspect = this.resolution.x / this.resolution.y;
     //this.dpr = window.devicePixelRatio > 1 ? 2 : 1;
     this.dpr = 1;
+    if(window.devicePixelRatio > 1) {
+      document.body.classList.add('retina');
+    } else {
+      document.body.classList.remove('retina');
+    }
 
     this.dom.container.style.width = `${this.resolution.x}px`;
     this.dom.container.style.height = `${this.resolution.y}px`;

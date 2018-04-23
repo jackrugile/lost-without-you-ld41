@@ -129,6 +129,9 @@ class World {
   }
 
   render() {
+    if(this.game.stateManager.current != 'play') {
+      return;
+    }
     //this.renderer.render(this.scene, this.camera);
     this.composer.render(0.00001);
   }

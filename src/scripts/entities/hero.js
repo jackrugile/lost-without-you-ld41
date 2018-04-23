@@ -122,7 +122,8 @@ class Hero {
         this.acceleration.x = 0;
       }
     }
-    this.velocity.x += this.acceleration.x;
+
+    this.velocity.x += this.acceleration.x * this.game.time.dtn;
     this.velocity.x *= this.velocityFriction;
     this.velocity.x = this.calc.clamp(this.velocity.x, -this.velocityMax, this.velocityMax);
     this.mesh.position.x += this.velocity.x;
@@ -154,7 +155,7 @@ class Hero {
         this.acceleration.z = 0;
       }
     }
-    this.velocity.z += this.acceleration.z;
+    this.velocity.z += this.acceleration.z * this.game.time.dtn;
     this.velocity.z *= this.velocityFriction;
     this.velocity.z = this.calc.clamp(this.velocity.z, -this.velocityMax, this.velocityMax);
     this.mesh.position.z += this.velocity.z;
