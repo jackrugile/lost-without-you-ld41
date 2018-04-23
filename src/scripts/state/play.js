@@ -15,7 +15,7 @@ class PlayState extends BaseState {
     this.game.levelManager.set(this.game.currentLevel);
 
     this.switchTime = 0;
-    this.switchTimeMax = 7500;
+    this.switchTimeMax = 6000;
 
     this.game.heroA.setActive(true);
     this.game.activeHero = this.game.heroA;
@@ -28,14 +28,7 @@ class PlayState extends BaseState {
     this.elapsedTime = 0;
     this.deltaTime = 0;
 
-    // set level title
-    let levelNames = [
-      'alpha',
-      'beta',
-      'gamma',
-      'delta'
-    ];
-    this.dom.levelTitle.textContent = `Level ${(levelNames.indexOf(this.game.currentLevel) + 1)}`;
+    this.dom.levelTitle.textContent = `Level ${(this.game.levelManager.levelNames.indexOf(this.game.currentLevel) + 1)}`;
   }
 
   setupDOM() {

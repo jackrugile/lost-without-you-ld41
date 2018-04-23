@@ -11,7 +11,7 @@
 - level failed
 - sound
 - music
-- asset loader
+
 - click for first sound play
 - juice
   - particle systems
@@ -25,13 +25,14 @@
 - Lvl 4, both start in center of level
 - icons
 - flash or puff when collecting firefly
+- eventually remove unused pre text in HTML
+- possible add ring back as LIFE meter and dash mark as TIME meter?
 
 # GENERAL
 
 - can I use spatial hash for better collision perf?
 - torches
   - touch collisions
-- remove modernizr bloat
 - find bottleneck on laptop
   - post process?
   - resolution?
@@ -51,10 +52,6 @@
 - death
 - music loop
 
-# NAME
-
-- lost without you
-
 # GENRE
 
 - solo-coop-turn-based action-puzzle
@@ -62,6 +59,11 @@
 # NICE TO HAVES
 
 - catch a high energy firefly orb to create a permanent light source
+- asset loader
+- mute
+- pause
+- settings
+- storage reset
 
 # INTRO / INSTRUCTIONS
 

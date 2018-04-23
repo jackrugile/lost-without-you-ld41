@@ -9,6 +9,14 @@ class LevelManager {
   constructor(game) {
     this.env = env;
     this.game = game;
+
+    this.levelNames = [
+      'alpha',
+      'beta',
+      'gamma',
+      'delta'
+    ];
+
     this.levels = {
       alpha: new AlphaLevel(this.game, 'alpha'),
       beta: new BetaLevel(this.game, 'beta'),

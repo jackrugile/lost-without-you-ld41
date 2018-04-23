@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const ModernizrWebpackPlugin = require("modernizr-webpack-plugin");
-const modernizr_config = require("../../../node_modules/modernizr/lib/config-all.json");
+const modernizr_config = require("../../modernizr-config.json");
 
 /*
 ------------------------------------------

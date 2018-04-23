@@ -258,11 +258,57 @@ h2
 //-------------------------------------------------
 
 .state-win
-  background: hsla(180, 100%, 50%, 0.2)
+  background: hsla(0, 0%, 0%, 0.5)
+  background: radial-gradient(#181818, #000)
+  text-align: center
+
+.state-win-title
+  color: #fff
+  font-size: 50px
+  font-weight: 500
+  line-height: 1.1
+  margin-bottom: 50px
+  span:nth-child(1)
+    color: hsl($hero-a-hue, $hero-sat, $hero-lit)
+  span:nth-child(2)
+    color: hsl($hero-b-hue, $hero-sat, $hero-lit)
+
+.state-win-info
+  color: #999
+  font-size: 30px
+  font-weight: 300
+  line-height: 1.4
+  span
+    color: #fff
+    font-family: 'Roboto Mono', monospace
+    font-size: 26px
+    font-weight: 500
+    letter-spacing: -0.05em
 
 //-------------------------------------------------
 // STATE LOSE
 //-------------------------------------------------
 
 .state-lose
-  background: hsla(220, 100%, 50%, 0.2)
+  background: hsla(0, 0%, 0%, 0.5)
+  background: radial-gradient(#181818, #000)
+  text-align: center
+
+.state-lose-title
+  color: #f33
+  font-size: 50px
+  font-weight: 500
+  line-height: 1.1
+  margin-bottom: 50px
+
+.state-lose-info
+  color: #999
+  font-size: 30px
+  font-weight: 300
+  line-height: 1.4
+  span
+    color: #fff
+    font-family: 'Roboto Mono', monospace
+    font-size: 26px
+    font-weight: 500
+    letter-spacing: -0.05em

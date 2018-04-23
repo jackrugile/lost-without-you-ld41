@@ -8,6 +8,7 @@ class WinState extends BaseState {
 
   setupDOM() {
     super.setupDOM();
+    this.dom.info = document.querySelector('.state-win-info');
   }
 
   observe() {
@@ -21,11 +22,18 @@ class WinState extends BaseState {
 
   activate() {
     super.activate();
+    this.tick = 0;
+    this.tickMax = 60 * 5;
     console.log(this.game.lastLevelPlayed, this.game.lastLevelTime);
+    this.dom.info.innerHTML = `Level ${this.game.levelManager.levelNames.indexOf(this.game.lastLevelPlayed) + 1} Complete<br><span>${this.utils.msToString(this.game.lastLevelTime)}</span>`;
   }
 
   update() {
     super.update();
+    this.tick++;
+    if(this.tick === this.tickMax) {
+      this.game.stateManager.set('menu');
+    }
   }
 
 }
