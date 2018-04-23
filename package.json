@@ -1,12 +1,12 @@
 {
-  "name": "starter-ld41",
+  "name": "lost-without-you-ld41",
   "author": "Jack Rugile <jack@jackrugile.com> (https://jackrugile.com)",
   "version": "0.0.1",
-  "description": "Ludum Dare 41 Starter",
+  "description": "Lost Without You",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git@github.com:jackrugile/starter-ld41.git"
+    "url": "git@github.com:jackrugile/lost-without-you-ld41.git"
   },
   "babel": {
     "presets": [
