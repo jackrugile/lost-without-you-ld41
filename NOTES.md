@@ -1,19 +1,18 @@
 # TASKS
 
-- sound
-  - unique audio per friend dialog
+- laptop performance
 - music
-- icons, favicon
-- meta tags
+- icon
 - flash or puff when collecting firefly
 - write game description
+  - meta tags
 - juice
   - particle systems
   - camera shake
   - light flashes
   - add mesh line explosion on unite
   - explode in to sky as maze drifts away
-  - make maze explode
+- fade in intro screen
 
 # BUGS / PERFORMANCE
 

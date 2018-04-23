@@ -93,6 +93,8 @@ class Hero {
 
     this.light2 = new THREE.PointLight(new THREE.Color(`hsl(${this.hue}, 75%, 50%)`), this.light2Intensity, this.lightDistanceBase, 2);
     this.light2.castShadow = true;
+    this.light2.shadow.mapSize.width = 128;
+    this.light2.shadow.mapSize.height = 128;
     this.mesh.add(this.light2);
   }
 
