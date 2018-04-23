@@ -28,6 +28,8 @@ class World {
     this.setupCameras();
     this.setupComposer();
     this.setupGrid();
+
+    this.cameraLift = 0;
   }
 
   observe() {
@@ -44,10 +46,26 @@ class World {
 
   endTick(e) {
     this.brightnessValue = e.prog * 0.75;
+    this.cameraLift = 3 + e.prog * 100;
   }
 
   playReset() {
     this.brightnessValue = 0;
+    this.cameraLift = 3;
+
+    // this.cameraCurrent.copy(this.game.activeHero.mesh.position);
+    // this.cameraTarget.copy(this.game.activeHero.mesh.position);
+    // this.cameraCurrent.y += 100;
+    // this.cameraTarget.y += 100;
+    // this.cameraLookAtCurrent.copy(this.game.activeHero.mesh.position);
+    // this.cameraLookAtTarget.copy(this.game.activeHero.mesh.position);
+
+    this.cameraCurrent.set(0, 0, 0);
+    this.cameraTarget.set(0, 0, 0);
+    this.cameraCurrent.y += 100;
+    this.cameraTarget.y += 100;
+    this.cameraLookAtCurrent.set(0, 0, 0);
+    this.cameraLookAtTarget.set(0, 0, 0);
   }
 
   setupScene() {
@@ -132,13 +150,14 @@ class World {
     //this.orbit.update();
     if(this.game.activeHero && this.game.stateManager.current === 'play') {
       this.cameraTarget.copy(this.game.activeHero.mesh.position);
-      this.cameraTarget.y = 3;
+      //this.cameraTarget.y = 3;
+      this.cameraTarget.y = this.cameraLift;
       this.cameraTarget.z += 0;
 
       this.cameraLookAtTarget.copy(this.game.activeHero.mesh.position);
 
-      this.cameraCurrent.lerp(this.cameraTarget, 0.1);
-      this.cameraLookAtCurrent.lerp(this.cameraLookAtTarget, 0.1);
+      this.cameraCurrent.lerp(this.cameraTarget, 0.15);
+      this.cameraLookAtCurrent.lerp(this.cameraLookAtTarget, 0.15);
 
       this.camera.position.copy(this.cameraCurrent);
       this.camera.lookAt(this.cameraLookAtCurrent);

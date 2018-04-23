@@ -1,14 +1,7 @@
 # TASKS
 
-- music
-- write game description
-  - meta tags
-- juice
-  - particle systems
-  - camera shake
-  - light flashes
-  - add mesh line explosion on unite
-  - explode in to sky as maze drifts away
+- particle systems
+- add mesh line explosion on unite
 
 # BUGS / PERFORMANCE
 
@@ -52,3 +45,5 @@
 - fade in intro screen
 - pause on blur, resume on focus
 - light streaks as camera moves
+- show whole scene before dialogue
+- camera shake

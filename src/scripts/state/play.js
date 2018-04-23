@@ -52,7 +52,7 @@ class PlayState extends BaseState {
   }
 
   switchHero() {
-    if(!this.isActive) {
+    if(!this.isActive || this.game.isEnding) {
       return;
     }
     if(this.game.heroA.isActive) {
@@ -68,6 +68,7 @@ class PlayState extends BaseState {
       this.dom.heroAWrap.classList.add('state-play-hero-wrap-active');
       this.dom.heroBWrap.classList.remove('state-play-hero-wrap-active');
     }
+    this.game.sounds.switch.play();
   }
 
   showMaryDialog() {
@@ -97,7 +98,7 @@ class PlayState extends BaseState {
     this.dom.dialog.innerHTML = dialog;
     setTimeout(() => {
       this.dom.dialog.classList.add('state-play-dialog-active');
-    }, 500);
+    }, 1500);
 
     this.dom.dialog.classList.remove('state-play-dialog-b');
     this.dom.dialog.classList.add('state-play-dialog-a');
@@ -147,7 +148,9 @@ class PlayState extends BaseState {
     }
 
     this.dom.dialog.innerHTML = dialog;
-    this.dom.dialog.classList.add('state-play-dialog-active');
+    setTimeout(() => {
+      this.dom.dialog.classList.add('state-play-dialog-active');
+    }, 1000);
 
     this.dom.dialog.classList.remove('state-play-dialog-a');
     this.dom.dialog.classList.add('state-play-dialog-b');
@@ -179,12 +182,21 @@ class PlayState extends BaseState {
     this.oldTime = this.nowTime;
     this.elapsedTime = 0;
     this.deltaTime = 0;
+
+    setTimeout(() => {
+      this.game.sounds.music.stop();
+      this.game.sounds.music.volume(0.3);
+      this.game.sounds.music.play();
+      //this.game.sounds.music.fade(0, 0.3, 500);
+    }, 1200);
   }
 
   startEnd() {
     this.game.isEnding = true;
     this.endTick = 0;
     this.endTickMax = 60 * 1.5;
+    this.game.sounds.music.fade(0.3, 0, 3000);
+    //this.game.sounds.music.stop();
   }
 
   update() {

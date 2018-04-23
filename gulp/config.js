@@ -34,7 +34,7 @@ module.exports = {
   "meta": {
     "google_analytics": "UA-5693606-7",
     "site_title": "Lost Without You",
-    "site_description": "Lost Without You | Ludum Dare 41",
+    "site_description": "Lost Without You is a turn-based action puzzler. Help two friends find each other in the dark before they run out of light. Alternate between each friend to navigate through the darkness in a mysterious labyrinth. Can you help them escape?",
     "site_keywords": "ludum dare, game, lost without you, indie game, game jam",
     "robots": () => {
       if( process.env.NODE_ENV == "production" ) {

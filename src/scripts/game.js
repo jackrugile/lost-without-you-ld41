@@ -159,33 +159,43 @@ class Game {
   setupSounds() {
     this.sounds = {
       fireflyCollect: new Howl({
-        src: ['./sounds/firefly-collect-1.wav'],
+        src: ['./sounds/firefly-collect.mp3'],
         volume: 1
       }),
       button: new Howl({
-        src: ['./sounds/button4.wav'],
-        volume: 0.3,
-        rate: 4
+        src: ['./sounds/click.mp3'],
+        volume: 0.9,
+        rate: 2
       }),
       levelIntro: new Howl({
-        src: ['./sounds/level_intro.wav'],
+        src: ['./sounds/intro.mp3'],
         volume: 1
       }),
       death: new Howl({
-        src: ['./sounds/death.wav'],
+        src: ['./sounds/death.mp3'],
         volume: 0.15
       }),
       unite: new Howl({
-        src: ['./sounds/unite-1.wav'],
-        volume: 0.5
+        src: ['./sounds/unite.mp3'],
+        volume: 0.1
       }),
       zoey: new Howl({
-        src: ['./sounds/zoey.wav'],
+        src: ['./sounds/zoey.mp3'],
         volume: 1
       }),
       mary: new Howl({
-        src: ['./sounds/mary.wav'],
-        volume: 0.3
+        src: ['./sounds/mary.mp3'],
+        volume: 0.2
+      }),
+      switch: new Howl({
+        src: ['./sounds/switch.mp3'],
+        volume: 0.4
+      }),
+      music: new Howl({
+        src: ['./sounds/music.mp3'],
+        volume: 0.3,
+        pool: 1,
+        loop: true
       })
     };
   }

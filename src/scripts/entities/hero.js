@@ -128,11 +128,13 @@ class Hero {
       this.acceleration.x = 0;
     }
 
-    this.velocity.x += this.acceleration.x * this.game.time.dtn;
-    this.velocity.x *= this.velocityFriction;
-    this.velocity.x = this.calc.clamp(this.velocity.x, -this.velocityMax, this.velocityMax);
-    this.mesh.position.x += this.velocity.x;
-    this.mesh.bbox.setFromObject(this.mesh);
+    if(!this.game.isEnding) {
+      this.velocity.x += this.acceleration.x * this.game.time.dtn;
+      this.velocity.x *= this.velocityFriction;
+      this.velocity.x = this.calc.clamp(this.velocity.x, -this.velocityMax, this.velocityMax);
+      this.mesh.position.x += this.velocity.x;
+      this.mesh.bbox.setFromObject(this.mesh);
+    }
 
     let walls = this.game.levelManager.current.walls;
     for(let i = 0, len = walls.length; i < len; i++) {
@@ -163,11 +165,13 @@ class Hero {
       this.acceleration.x = 0;
     }
 
-    this.velocity.z += this.acceleration.z * this.game.time.dtn;
-    this.velocity.z *= this.velocityFriction;
-    this.velocity.z = this.calc.clamp(this.velocity.z, -this.velocityMax, this.velocityMax);
-    this.mesh.position.z += this.velocity.z;
-    this.mesh.bbox.setFromObject(this.mesh);
+    if(!this.game.isEnding) {
+      this.velocity.z += this.acceleration.z * this.game.time.dtn;
+      this.velocity.z *= this.velocityFriction;
+      this.velocity.z = this.calc.clamp(this.velocity.z, -this.velocityMax, this.velocityMax);
+      this.mesh.position.z += this.velocity.z;
+      this.mesh.bbox.setFromObject(this.mesh);
+    }
 
     for(let i = 0, len = walls.length; i < len; i++) {
       let wall = walls[i];
@@ -237,17 +241,17 @@ class Hero {
   collectFirefly() {
     this.life += 0.2;
     this.life = this.calc.clamp(this.life, 0, 1);
-    this.game.sounds.fireflyCollect.play();
     this.ghostOpacity = 1;
     this.ghostScale = 2;
     if(this.isActive) {
+      this.game.sounds.fireflyCollect.play();
       this.env.eventful.trigger('collect-firefly');
     }
   }
 
   spawnGhost() {
-    this.ghostGeometry = new THREE.BoxBufferGeometry(this.width, this.height, this.depth);
-    //this.ghostGeometry = new THREE.SphereBufferGeometry(this.width, 32, 32);
+    //this.ghostGeometry = new THREE.BoxBufferGeometry(this.width, this.height, this.depth);
+    this.ghostGeometry = new THREE.SphereBufferGeometry(this.width, 32, 32);
     this.ghostMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       transparent: true,
@@ -278,6 +282,7 @@ class Hero {
         this.game.lastLevelPlayed = this.game.currentLevel;
         this.game.lastLevelTime = this.game.currentState.elapsedTime;
         this.game.stateManager.set('lose');
+        this.game.sounds.music.fade(0.3, 0, 1500);
       }
     }
     this.lifeMeshBack.position.copy(this.mesh.position);
