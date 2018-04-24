@@ -124,14 +124,14 @@ class World {
     this.rgbPass.renderToScreen = false;
     this.composer.addPass(this.rgbPass);
 
-    // this.bloomPass = new THREE.UnrealBloomPass(
-    //   new THREE.Vector2(window.innerWidth, window.innerHeight), // resolution
-    //   0.75, // strength
-    //   0.5, // radius
-    //   0.75 //threshold
-    // );
-    // this.bloomPass.renderToScreen = false;
-    // this.composer.addPass(this.bloomPass);
+    this.bloomPass = new THREE.UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight), // resolution
+      0.75, // strength
+      0.5, // radius
+      0.75 //threshold
+    );
+    this.bloomPass.renderToScreen = false;
+    this.composer.addPass(this.bloomPass);
 
     // noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale
     this.filmPass = new THREE.FilmPass(0.15, 0.5, 2048, false);

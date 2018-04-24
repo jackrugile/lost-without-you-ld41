@@ -160,7 +160,8 @@ class Game {
     this.sounds = {
       fireflyCollect: new Howl({
         src: ['./sounds/firefly-collect.mp3'],
-        volume: 1
+        volume: 1,
+        rate: 1.5
       }),
       button: new Howl({
         src: ['./sounds/click.mp3'],

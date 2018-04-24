@@ -1,6 +1,7 @@
 const env = require('../env.js');
 const Calc = require('../utils/calc');
 const Ease = require('../utils/ease');
+const ParticleSystem = require('./particle-system');
 
 class Hero {
 
@@ -39,6 +40,7 @@ class Hero {
     this.setupLights();
     this.setupCollisions();
     this.spawnGhost();
+    this.setupParticleSystem();
   }
 
   observe() {
@@ -80,7 +82,7 @@ class Hero {
       blending: THREE.AdditiveBlending,
       color: new THREE.Color(`hsl(${this.hue}, 80%, 50%)`),
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.45,
       depthTest: false
     });
     this.lifeMeshScaleCurrent = 1;
@@ -244,6 +246,7 @@ class Hero {
     this.ghostOpacity = 1;
     this.ghostScale = 2;
     if(this.isActive) {
+      this.game.sounds.fireflyCollect.rate(this.calc.rand(1.5, 2));
       this.game.sounds.fireflyCollect.play();
       this.env.eventful.trigger('collect-firefly');
     }
@@ -265,6 +268,10 @@ class Hero {
     this.ghostOpacity = 0;
     this.ghostScale = 2;
     this.game.world.scene.add(this.ghostMesh);
+  }
+
+  setupParticleSystem() {
+    this.particleSystem = new ParticleSystem(this.game, this.game.world.scene, this, this.hue);
   }
 
   updateLightLife() {
@@ -318,6 +325,8 @@ class Hero {
     this.lifeGeometryBack.dispose();
     this.lifeMaterialBack.dispose();
     this.lifeMeshBack = null;
+
+    this.particleSystem.destroy();
   }
 
   update() {
@@ -331,6 +340,9 @@ class Hero {
     this.collideFireflies();
     this.updateLightLife();
 
+    this.particleSystem.update();
+    //this.particleSystem.particleGroup.position.copy(this.mesh.position);
+
     this.ghostMesh.position.copy(this.mesh.position);
 
     if(this.ghostOpacity > 0) {
@@ -339,9 +351,6 @@ class Hero {
     let eased = this.ease.inExpo(this.ghostOpacity, 0, 1, 1);
     this.ghostMaterial.opacity = eased;
 
-    // if(this.ghostScale > 1) {
-    //   this.ghostScale -= 0.02;
-    // }
     let newScale = 1 + eased * 0.5;
     this.ghostMesh.scale.set(newScale, newScale, newScale);
   }

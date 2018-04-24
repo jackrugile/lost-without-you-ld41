@@ -1,13 +1,7 @@
-# TASKS
-
-- particle systems
-- add mesh line explosion on unite
-
 # BUGS / PERFORMANCE
 
 - can I use spatial hash for better collision perf?
 - possible add second line to bottom of hero to show time left
-- click for first sound play to bypass sound browser lock
 
 # SOUNDS
 
@@ -23,10 +17,6 @@
 - level intro
 - button sound
 - different death sound for mary and zoey
-
-# GENRE
-
-- solo-coop-turn-based action-puzzle
 
 # NICE TO HAVES
 
@@ -47,3 +37,5 @@
 - light streaks as camera moves
 - show whole scene before dialogue
 - camera shake
+- add mesh line explosion on unite
+- very lightweight aprticle systems on fireflies
