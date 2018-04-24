@@ -163,8 +163,8 @@ class World {
       this.camera.lookAt(this.cameraLookAtCurrent);
     }
 
-    this.rgbPass.uniforms['amount'].value = 0.0006 + Math.sin(Date.now() * 0.003) * 0.0006;
-    this.rgbPass.uniforms['angle'].value -= 0.05;
+    this.rgbPass.uniforms['amount'].value = 0.0008 + Math.sin(Date.now() * 0.003) * 0.0008;
+    this.rgbPass.uniforms['angle'].value -= 0.1;
     //this.bloomPass.strength = 0.5 + Math.sin(Date.now() * 0.003) * 0.5;
     //this.bloomPass.radius = 1 + Math.sin(Date.now() * 0.003) * 1;
     //this.bloomPass.radius = 0.5 - Math.sin(Date.now() * 0.003) * 0.25;

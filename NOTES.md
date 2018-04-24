@@ -39,3 +39,4 @@
 - camera shake
 - add mesh line explosion on unite
 - very lightweight aprticle systems on fireflies
+- add background panel to dialog for easier readability
