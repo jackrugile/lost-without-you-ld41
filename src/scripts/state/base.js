@@ -26,14 +26,12 @@ class BaseState {
     this.game.currentState = this;
     this.dom.state.classList.add('state-active');
     this.env.eventful.trigger(`${this.name}-state-activate`);
-    console.log(`${this.name} state activated`);
   }
 
   deactivate() {
     this.isActive = false;
     this.dom.state.classList.remove('state-active');
     this.env.eventful.trigger(`${this.name}-state-deactivate`);
-    console.log(`${this.name} state deactivated`);
   }
 
   update() {
