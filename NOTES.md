@@ -38,5 +38,5 @@
 - show whole scene before dialogue
 - camera shake
 - add mesh line explosion on unite
-- very lightweight aprticle systems on fireflies
+- very lightweight particle systems on fireflies
 - add background panel to dialog for easier readability
